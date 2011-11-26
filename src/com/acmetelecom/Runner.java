@@ -1,24 +1,35 @@
 package com.acmetelecom;
 
+
 public class Runner
 {
 	public static void main(String[] args) throws Exception
 	{
 //		runSimpleSetOfCalls();
+		runOneStandardCall();
+	}
+
+
+	private static void sleepSeconds(int n) throws InterruptedException
+	{
+		while(n>0)
+		{
+			System.out.println("Sleeping for " + n + " seconds more.");
+			Thread.sleep(1000);
+			n--;
+		}
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private static void runOneStandardCall() throws InterruptedException
+	{
 		BillingSystem billingSystem = new BillingSystem();
 		billingSystem.callInitiated("447722113434", "447766814143");
 		sleepSeconds(20);
 		billingSystem.callCompleted("447722113434", "447766814143");
 		billingSystem.createCustomerBills();
 	}
-
-	private static void sleepSeconds(int n) throws InterruptedException
-	{
-		Thread.sleep(n * 1000);
-	}
-	
-	
-	
 	
 	
 	@SuppressWarnings("unused")
