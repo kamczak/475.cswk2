@@ -1,5 +1,16 @@
 package com.acmetelecom;
 
+import java.util.List;
+
+import com.acmetelecom.bill.BillGenerator;
+import com.acmetelecom.bill.PrintingBillGenerator;
+import com.acmetelecom.bill.BillingSystem;
+import com.acmetelecom.customer.CentralCustomerDatabase;
+import com.acmetelecom.customer.Customer;
+import com.acmetelecom.printer.HtmlPrinter;
+import com.acmetelecom.time.Clock;
+import com.acmetelecom.time.SystemClock;
+
 
 public class Runner
 {
@@ -24,11 +35,14 @@ public class Runner
 	@SuppressWarnings("unused")
 	private static void runOneStandardCall() throws InterruptedException
 	{
-		BillingSystem billingSystem = new BillingSystem();
+		BillGenerator bg = new PrintingBillGenerator(HtmlPrinter.getInstance());
+		Clock ck = new SystemClock();
+		BillingSystem billingSystem = new BillingSystem(bg, ck);
 		billingSystem.callInitiated("447722113434", "447766814143");
 		sleepSeconds(20);
 		billingSystem.callCompleted("447722113434", "447766814143");
-		billingSystem.createCustomerBills();
+		List<Customer> customers = CentralCustomerDatabase.getInstance().getCustomers();
+		billingSystem.createCustomerBills(customers);
 	}
 	
 	
@@ -36,7 +50,9 @@ public class Runner
 	private static void runSimpleSetOfCalls() throws InterruptedException
 	{
 		System.out.println("Running...");
-		BillingSystem billingSystem = new BillingSystem();
+		BillGenerator bg = new PrintingBillGenerator(HtmlPrinter.getInstance());
+		Clock ck = new SystemClock();
+		BillingSystem billingSystem = new BillingSystem(bg, ck);
 		billingSystem.callInitiated("447722113434", "447766814143");
 		sleepSeconds(20);
 		billingSystem.callCompleted("447722113434", "447766814143");
@@ -46,6 +62,7 @@ public class Runner
 		billingSystem.callInitiated("447777765432", "447711111111");
 		sleepSeconds(60);
 		billingSystem.callCompleted("447777765432", "447711111111");
-		billingSystem.createCustomerBills();
+		List<Customer> customers = CentralCustomerDatabase.getInstance().getCustomers();
+		billingSystem.createCustomerBills(customers);
 	}
 }

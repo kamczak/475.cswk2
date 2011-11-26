@@ -1,0 +1,9 @@
+.classpath
+.project
+.settings/*
+.settings/
+bin/*
+bin/
+*.class
+generated-bills/*
+lib/META-INF/

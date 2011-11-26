@@ -1,9 +1,13 @@
-package com.acmetelecom;
+package com.acmetelecom.bill;
 
-import com.acmetelecom.customer.CentralCustomerDatabase;
+import com.acmetelecom.call.Call;
+import com.acmetelecom.call.CallEnd;
+import com.acmetelecom.call.CallEvent;
+import com.acmetelecom.call.CallStart;
 import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.Tariff;
+import com.acmetelecom.time.Clock;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,23 +15,30 @@ import java.util.*;
 
 public class BillingSystem
 {
+	private BillGenerator _billGenerator;
+	private Clock _clock;
+	
+	public BillingSystem(BillGenerator billGenerator_, Clock clock_)
+	{
+		_clock = clock_;
+		_billGenerator = billGenerator_;
+	}
 
 	private List<CallEvent> callLog = new ArrayList<CallEvent>();
 
 	public void callInitiated(String caller, String callee)
 	{
-		callLog.add(new CallStart(caller, callee));
+		callLog.add(new CallStart(caller, callee, _clock.getCurrentTime()));
 	}
 
 	public void callCompleted(String caller, String callee)
 	{
-		callLog.add(new CallEnd(caller, callee));
+		callLog.add(new CallEnd(caller, callee, _clock.getCurrentTime()));
 	}
 
-	public void createCustomerBills()
+	public void createCustomerBills(List<Customer> customers_)
 	{
-		List<Customer> customers = CentralCustomerDatabase.getInstance().getCustomers();
-		for (Customer customer : customers)
+		for (Customer customer : customers_)
 		{
 			createBillFor(customer);
 		}
@@ -87,7 +98,7 @@ public class BillingSystem
 			items.add(new LineItem(call, callCost));
 		}
 
-		new BillGenerator().send(customer, items, MoneyFormatter.penceToPounds(totalBill));
+		_billGenerator.send(customer, items, MoneyFormatter.penceToPounds(totalBill));
 	}
 
 	static class LineItem
