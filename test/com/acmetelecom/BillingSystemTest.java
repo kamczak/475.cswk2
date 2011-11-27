@@ -12,8 +12,10 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
+import com.acmetelecom.customer.CentralCustomerDatabase;
 import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
+import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
@@ -30,9 +32,12 @@ public class BillingSystemTest {
 
     // mocked TariffLibrary
     TariffLibrary tariffDB = context.mock(TariffLibrary.class);
+    
+    // mocked CustomerDatabase
+    CustomerDatabase customerDB = context.mock(CustomerDatabase.class);
 
-    // real BillingSystem, initialise with the mocked BillGenerator
-    BillingSystem billingSystem = new BillingSystem(tariffDB, billGenerator, clock);
+    // real BillingSystem, initialised with the mocked objects
+    BillingSystem billingSystem = new BillingSystem(customerDB, tariffDB, billGenerator, clock);
 
     // fake customers
     private static final String FIRST_CUSTOMER_NAME = "Fred Bloggs";
@@ -41,6 +46,11 @@ public class BillingSystemTest {
     private static final Customer firstCustomer = new Customer(FIRST_CUSTOMER_NAME,
 	    						       FIRST_CUSTOMER_NUMBER,
 	    						       FIRST_CUSTOMER_TARIFF.name());
+    
+    @SuppressWarnings("serial")
+    private static final List<Customer> CUSTOMERS = new ArrayList<Customer>(1) {{
+	add(firstCustomer);
+    }};
 
     private static final String OTHER_NUMBER = "447722113434";
 
@@ -62,6 +72,8 @@ public class BillingSystemTest {
 		    				));
 
 	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
+	    
+	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
 
 	    oneOf (billGenerator).send(with(same(firstCustomer)),
 		    		       with(aNonNull(List.class)),
@@ -71,7 +83,7 @@ public class BillingSystemTest {
 	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 
-	billingSystem.createCustomerBills(new ArrayList<Customer>() {{ add(firstCustomer); }});
+	billingSystem.createCustomerBills();
     }
 
     @SuppressWarnings("unchecked")
@@ -92,6 +104,8 @@ public class BillingSystemTest {
 		    				));
 
 	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
+	    
+	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
 
 	    oneOf (billGenerator).send(with(same(firstCustomer)),
 		    		       with(aNonNull(List.class)),
@@ -101,7 +115,7 @@ public class BillingSystemTest {
 	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 
-	billingSystem.createCustomerBills(new ArrayList<Customer>() {{ add(firstCustomer); }});
+	billingSystem.createCustomerBills();
     }
 
     @SuppressWarnings("unchecked")
@@ -133,6 +147,8 @@ public class BillingSystemTest {
 
 	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
 	    
+	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
+	    
 	    oneOf (billGenerator).send(with(same(firstCustomer)),
 		    		       with(aNonNull(List.class)),
 		    		       with(equal("72.00")));
@@ -144,7 +160,7 @@ public class BillingSystemTest {
 	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
 
-	billingSystem.createCustomerBills(new ArrayList<Customer>() {{ add(firstCustomer); }});
+	billingSystem.createCustomerBills();
     }
 
 }

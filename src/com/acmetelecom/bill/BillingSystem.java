@@ -4,8 +4,10 @@ import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEnd;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallStart;
+import com.acmetelecom.customer.CentralCustomerDatabase;
 import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
+import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
@@ -15,17 +17,20 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class BillingSystem {
+    private CustomerDatabase _customerDatabase;
     private TariffLibrary _tariffDatabase;
     private BillGenerator _billGenerator;
     private Clock _clock;
 
-    public BillingSystem(TariffLibrary tariffDatabase, BillGenerator billGenerator, Clock clock) {
+    private List<CallEvent> callLog = new ArrayList<CallEvent>();
+
+    public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
+	    		 BillGenerator billGenerator, Clock clock) {
+	_customerDatabase = customerDatabase;
 	_tariffDatabase = tariffDatabase;
 	_clock = clock;
 	_billGenerator = billGenerator;
     }
-
-    private List<CallEvent> callLog = new ArrayList<CallEvent>();
 
     public void callInitiated(String caller, String callee) {
 	callLog.add(new CallStart(caller, callee, _clock.getCurrentTime()));
@@ -35,7 +40,8 @@ public class BillingSystem {
 	callLog.add(new CallEnd(caller, callee, _clock.getCurrentTime()));
     }
 
-    public void createCustomerBills(List<Customer> customers) {
+    public void createCustomerBills() {
+	List<Customer> customers = _customerDatabase.getCustomers();
 	for (Customer customer : customers) {
 	    createBillFor(customer);
 	}
