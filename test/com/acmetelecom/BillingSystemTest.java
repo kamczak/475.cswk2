@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
+import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.time.Clock;
@@ -25,7 +26,7 @@ public class BillingSystemTest
 	Clock clock = context.mock(Clock.class);
 	
 	// real BillingSystem, initialise with the mocked BillGenerator
-	BillingSystem billingSystem = new BillingSystem(billGenerator, clock);
+	BillingSystem billingSystem = new BillingSystem(CentralTariffDatabase.getInstance(), billGenerator, clock);
 	
 	// own customer list, instead of calling CentralCustomerDatabase
 	@SuppressWarnings("serial")

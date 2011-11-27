@@ -7,6 +7,7 @@ import com.acmetelecom.call.CallStart;
 import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.Tariff;
+import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
 
 import java.math.BigDecimal;
@@ -14,10 +15,12 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class BillingSystem {
+    private TariffLibrary _tariffDatabase;
     private BillGenerator _billGenerator;
     private Clock _clock;
 
-    public BillingSystem(BillGenerator billGenerator, Clock clock) {
+    public BillingSystem(TariffLibrary tariffDatabase, BillGenerator billGenerator, Clock clock) {
+	_tariffDatabase = tariffDatabase;
 	_clock = clock;
 	_billGenerator = billGenerator;
     }
@@ -65,7 +68,7 @@ public class BillingSystem {
 
 	for (Call call : calls) {
 
-	    Tariff tariff = CentralTariffDatabase.getInstance().tarriffFor(customer);
+	    Tariff tariff = _tariffDatabase.tarriffFor(customer);
 
 	    BigDecimal cost;
 

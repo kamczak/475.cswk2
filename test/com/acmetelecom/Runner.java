@@ -6,6 +6,7 @@ import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.PrintingBillGenerator;
 import com.acmetelecom.bill.BillingSystem;
 import com.acmetelecom.customer.CentralCustomerDatabase;
+import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.printer.HtmlPrinter;
 import com.acmetelecom.time.Clock;
@@ -37,7 +38,7 @@ public class Runner
 	{
 		BillGenerator bg = new PrintingBillGenerator(HtmlPrinter.getInstance());
 		Clock ck = new SystemClock();
-		BillingSystem billingSystem = new BillingSystem(bg, ck);
+		BillingSystem billingSystem = new BillingSystem(CentralTariffDatabase.getInstance(), bg, ck);
 		billingSystem.callInitiated("447722113434", "447766814143");
 		sleepSeconds(20);
 		billingSystem.callCompleted("447722113434", "447766814143");
@@ -52,7 +53,7 @@ public class Runner
 		System.out.println("Running...");
 		BillGenerator bg = new PrintingBillGenerator(HtmlPrinter.getInstance());
 		Clock ck = new SystemClock();
-		BillingSystem billingSystem = new BillingSystem(bg, ck);
+		BillingSystem billingSystem = new BillingSystem(CentralTariffDatabase.getInstance(), bg, ck);
 		billingSystem.callInitiated("447722113434", "447766814143");
 		sleepSeconds(20);
 		billingSystem.callCompleted("447722113434", "447766814143");
