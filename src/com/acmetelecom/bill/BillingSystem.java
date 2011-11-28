@@ -4,8 +4,6 @@ import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEnd;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallStart;
-import com.acmetelecom.customer.CentralCustomerDatabase;
-import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
