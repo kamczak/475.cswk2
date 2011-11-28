@@ -2,7 +2,6 @@ package com.acmetelecom;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.jmock.Expectations;
@@ -12,13 +11,13 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
-import com.acmetelecom.customer.CentralCustomerDatabase;
-import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
+
+import static com.acmetelecom.ListSizeMatcher.aListOfSize;
 
 public class BillingSystemTest {
     @Rule
@@ -32,7 +31,7 @@ public class BillingSystemTest {
 
     // mocked TariffLibrary
     TariffLibrary tariffDB = context.mock(TariffLibrary.class);
-    
+
     // mocked CustomerDatabase
     CustomerDatabase customerDB = context.mock(CustomerDatabase.class);
 
@@ -44,174 +43,370 @@ public class BillingSystemTest {
     private static final String FIRST_CUSTOMER_NUMBER = "447711232343";
     private static final Tariff FIRST_CUSTOMER_TARIFF = Tariff.Standard;
     private static final Customer firstCustomer = new Customer(FIRST_CUSTOMER_NAME,
-	    						       FIRST_CUSTOMER_NUMBER,
-	    						       FIRST_CUSTOMER_TARIFF.name());
-    
+            FIRST_CUSTOMER_NUMBER, FIRST_CUSTOMER_TARIFF.name());
+
+    private static final String SECOND_CUSTOMER_NAME = "Joe Doe";
+    private static final String SECOND_CUSTOMER_NUMBER = "447722232355";
+    private static final Tariff SECOND_CUSTOMER_TARIFF = Tariff.Leisure;
+    private static final Customer secondCustomer = new Customer(SECOND_CUSTOMER_NAME,
+            SECOND_CUSTOMER_NUMBER, SECOND_CUSTOMER_TARIFF.name());
+
     @SuppressWarnings("serial")
-    private static final List<Customer> CUSTOMERS = new ArrayList<Customer>(1) {{
-	add(firstCustomer);
-    }};
+    private static final List<Customer> ONE_CUSTOMER_LIST = new ArrayList<Customer>(1) {
+        {
+            add(firstCustomer);
+        }
+    };
+
+    @SuppressWarnings("serial")
+    private static final List<Customer> TWO_CUSTOMERS_LIST = new ArrayList<Customer>(2) {
+        {
+            add(firstCustomer);
+            add(secondCustomer);
+        }
+    };
 
     private static final String OTHER_NUMBER = "447722113434";
 
     @SuppressWarnings("unchecked")
     @Test
     public void calculatesOffPeakCallCorrectly() {
-	final Calendar start = Calendar.getInstance();
-	start.clear();
-	start.set(2011, 0, 1, 6, 0, 0);
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
 
-	final Calendar end = Calendar.getInstance();
-	end.clear();
-	end.set(2011, 0, 1, 6, 1, 0);
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 6, 1, 0);
 
-	context.checking(new Expectations() {{
-	    allowing (clock).getCurrentTime();
-	    		will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
-		    				returnValue(end.getTimeInMillis())
-		    				));
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
 
-	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
-	    
-	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
 
-	    oneOf (billGenerator).send(with(same(firstCustomer)),
-		    		       with(aNonNull(List.class)),
-		    		       with(equal("0.12")));
-	}});
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
 
-	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
-	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aNonNull(List.class)),
+                        with(equal("0.12")));
+            }
+        });
 
-	billingSystem.createCustomerBills();
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void calculatesWholeInPeakCallCorrectly() {
-	final Calendar start = Calendar.getInstance();
-	start.clear();
-	start.set(2011, 0, 1, 8, 0, 0);
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 8, 0, 0);
 
-	final Calendar end = Calendar.getInstance();
-	end.clear();
-	end.set(2011, 0, 1, 8, 1, 0);
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 8, 1, 0);
 
-	context.checking(new Expectations() {{
-	    allowing (clock).getCurrentTime();
-	    		will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
-		    				returnValue(end.getTimeInMillis())
-		    				));
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
 
-	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
-	    
-	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
 
-	    oneOf (billGenerator).send(with(same(firstCustomer)),
-		    		       with(aNonNull(List.class)),
-		    		       with(equal("0.30")));
-	}});
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
 
-	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
-	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aNonNull(List.class)),
+                        with(equal("0.30")));
+            }
+        });
 
-	billingSystem.createCustomerBills();
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void calculatesOverlappingLeftPeakCallCorrectly() {
-	final Calendar start = Calendar.getInstance();
-	start.clear();
-	start.set(2011, 0, 1, 6, 0, 0);
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
 
-	final Calendar end = Calendar.getInstance();
-	end.clear();
-	end.set(2011, 0, 1, 8, 0, 0);
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 8, 0, 0);
 
-	context.checking(new Expectations() {{
-	    allowing (clock).getCurrentTime();
-	    		will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
-		    				returnValue(end.getTimeInMillis())
-		    				));
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
 
-	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
-	    
-	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
-	    
-	    oneOf (billGenerator).send(with(same(firstCustomer)),
-		    		       with(aNonNull(List.class)),
-		    		       with(equal("36.00")));
-	}});
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
 
-	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
-	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
 
-	billingSystem.createCustomerBills();
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aNonNull(List.class)),
+                        with(equal("36.00")));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
     }
-    
+
     @SuppressWarnings("unchecked")
     @Test
     public void calculatesOverlappingRightPeakCallCorrectly() {
-	final Calendar start = Calendar.getInstance();
-	start.clear();
-	start.set(2011, 0, 1, 18, 0, 0);
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 18, 0, 0);
 
-	final Calendar end = Calendar.getInstance();
-	end.clear();
-	end.set(2011, 0, 1, 20, 0, 0);
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 20, 0, 0);
 
-	context.checking(new Expectations() {{
-	    allowing (clock).getCurrentTime();
-	    		will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
-		    				returnValue(end.getTimeInMillis())
-		    				));
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
 
-	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
-	    
-	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
-	    
-	    oneOf (billGenerator).send(with(same(firstCustomer)),
-		    		       with(aNonNull(List.class)),
-		    		       with(equal("36.00")));
-	}});
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
 
-	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
-	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
 
-	billingSystem.createCustomerBills();
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aNonNull(List.class)),
+                        with(equal("36.00")));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
     }
-    
+
     @SuppressWarnings("unchecked")
     @Test
     public void calculatesOverlappingBothPeakCallCorrectly() {
-	final Calendar start = Calendar.getInstance();
-	start.clear();
-	start.set(2011, 0, 1, 6, 0, 0);
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
 
-	final Calendar end = Calendar.getInstance();
-	end.clear();
-	end.set(2011, 0, 1, 20, 0, 0);
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 20, 0, 0);
 
-	context.checking(new Expectations() {{
-	    allowing (clock).getCurrentTime();
-	    		will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
-		    				returnValue(end.getTimeInMillis())
-		    				));
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
 
-	    allowing (tariffDB).tarriffFor(firstCustomer); will(returnValue(Tariff.Standard));
-	    
-	    allowing (customerDB).getCustomers(); will(returnValue(CUSTOMERS));
-	    
-	    oneOf (billGenerator).send(with(same(firstCustomer)),
-		    		       with(aNonNull(List.class)),
-		    		       with(equal("252.00")));
-	}});
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
 
-	billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
-	billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
 
-	billingSystem.createCustomerBills();
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aNonNull(List.class)),
+                        with(equal("252.00")));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
+    }
+
+    @Test
+    public void oneCallIsAddedCorrectlyToLog() {
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
+
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 20, 0, 0);
+
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
+
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
+
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
+
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aListOfSize(1)),
+                        with(any(String.class)));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
+    }
+
+    @Test
+    public void onlyCallStartIsNotAddedToLog() {
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
+
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis())));
+
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
+
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
+
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aListOfSize(0)),
+                        with(any(String.class)));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
+    }
+
+    @Test
+    public void onlyCallEndIsNotAddedToLog() {
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 6, 0, 0);
+
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(end.getTimeInMillis())));
+
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
+
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
+
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aListOfSize(0)),
+                        with(any(String.class)));
+            }
+        });
+
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
+    }
+
+    @Test
+    public void twoAndHalfCallAreAddedCorrectlyToLog() {
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
+
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 20, 0, 0);
+
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis()), returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis()), returnValue(start.getTimeInMillis())));
+
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
+
+                allowing(customerDB).getCustomers();
+                will(returnValue(ONE_CUSTOMER_LIST));
+
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aListOfSize(2)),
+                        with(any(String.class)));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
+    }
+
+    @Test
+    public void threeCallsTwoCustomersAddedCorrectlyToLog() {
+        final Calendar start = Calendar.getInstance();
+        start.clear();
+        start.set(2011, 0, 1, 6, 0, 0);
+
+        final Calendar end = Calendar.getInstance();
+        end.clear();
+        end.set(2011, 0, 1, 20, 0, 0);
+
+        context.checking(new Expectations() {
+            {
+                allowing(clock).getCurrentTime();
+                will(onConsecutiveCalls(returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis()), returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis()), returnValue(start.getTimeInMillis()),
+                        returnValue(end.getTimeInMillis())));
+
+                allowing(tariffDB).tarriffFor(firstCustomer);
+                will(returnValue(FIRST_CUSTOMER_TARIFF));
+                allowing(tariffDB).tarriffFor(secondCustomer);
+                will(returnValue(SECOND_CUSTOMER_TARIFF));
+
+                allowing(customerDB).getCustomers();
+                will(returnValue(TWO_CUSTOMERS_LIST));
+
+                oneOf(billGenerator).send(with(same(firstCustomer)), with(aListOfSize(1)),
+                        with(any(String.class)));
+                oneOf(billGenerator).send(with(same(secondCustomer)), with(aListOfSize(2)),
+                        with(any(String.class)));
+            }
+        });
+
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.callInitiated(SECOND_CUSTOMER_NUMBER, FIRST_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(SECOND_CUSTOMER_NUMBER, FIRST_CUSTOMER_NUMBER);
+
+        billingSystem.callInitiated(SECOND_CUSTOMER_NUMBER, OTHER_NUMBER);
+        billingSystem.callCompleted(SECOND_CUSTOMER_NUMBER, OTHER_NUMBER);
+
+        billingSystem.createCustomerBills();
     }
 
 }
