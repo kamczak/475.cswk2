@@ -1,9 +1,9 @@
 package com.acmetelecom.bill;
 
 import com.acmetelecom.call.Call;
-import com.acmetelecom.call.CallEnd;
 import com.acmetelecom.call.CallEvent;
-import com.acmetelecom.call.CallStart;
+import com.acmetelecom.call.CallLog;
+import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
@@ -17,25 +17,25 @@ import java.util.*;
 public class BillingSystem {
     private CustomerDatabase _customerDatabase;
     private TariffLibrary _tariffDatabase;
+    private CallLog _callLog;
     private BillGenerator _billGenerator;
     private Clock _clock;
 
-    private List<CallEvent> callLog = new ArrayList<CallEvent>();
-
     public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
-            BillGenerator billGenerator, Clock clock) {
+            CallLog callLog, BillGenerator billGenerator, Clock clock) {
         _customerDatabase = customerDatabase;
         _tariffDatabase = tariffDatabase;
+        _callLog = callLog;
         _clock = clock;
         _billGenerator = billGenerator;
     }
 
-    public void callInitiated(String caller, String callee) {
-        callLog.add(new CallStart(caller, callee, _clock.getCurrentTime()));
+    public void callInitiated(Customer caller, Customer callee) {
+        _callLog.callInitiated(caller, callee);
     }
 
-    public void callCompleted(String caller, String callee) {
-        callLog.add(new CallEnd(caller, callee, _clock.getCurrentTime()));
+    public void callCompleted(Customer caller, Customer callee) {
+        _callLog.callCompleted(caller, callee);
     }
 
     public void createCustomerBills() {
@@ -43,29 +43,16 @@ public class BillingSystem {
         for (Customer customer : customers) {
             createBillFor(customer);
         }
-        callLog.clear();
+    }
+
+    public void createCustomerBills(List<Customer> customers_) {
+        for (Customer customer : customers_) {
+            createBillFor(customer);
+        }
     }
 
     private void createBillFor(Customer customer) {
-        List<CallEvent> customerEvents = new ArrayList<CallEvent>();
-        for (CallEvent callEvent : callLog) {
-            if (callEvent.getCaller().equals(customer.getPhoneNumber())) {
-                customerEvents.add(callEvent);
-            }
-        }
-
-        List<Call> calls = new ArrayList<Call>();
-
-        CallEvent start = null;
-        for (CallEvent event : customerEvents) {
-            if (event instanceof CallStart) {
-                start = event;
-            }
-            if (event instanceof CallEnd && start != null) {
-                calls.add(new Call(start, event));
-                start = null;
-            }
-        }
+        List<Call> calls = _callLog.getCalls(customer);
 
         BigDecimal totalBill = new BigDecimal(0);
         List<LineItem> items = new ArrayList<LineItem>();

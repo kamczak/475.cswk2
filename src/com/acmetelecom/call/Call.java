@@ -16,7 +16,7 @@ public class Call {
         return start.getCallee();
     }
 
-    public int durationSeconds() {
+    public int durationSeconds() { 
         return (int) (((end.time() - start.time()) / 1000));
     }
 

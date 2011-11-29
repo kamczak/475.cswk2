@@ -1,13 +1,15 @@
 package com.acmetelecom.call;
 
-public abstract class CallEvent {
+import com.acmetelecom.customer.Customer;
+
+public class CallEvent {
     private String caller;
     private String callee;
     private long time;
 
-    public CallEvent(String caller, String callee, long timeStamp) {
-        this.caller = caller;
-        this.callee = callee;
+    public CallEvent(Customer caller, Customer callee, long timeStamp) {
+        this.caller = caller.getPhoneNumber();
+        this.callee = callee.getPhoneNumber();
         this.time = timeStamp;
     }
 
