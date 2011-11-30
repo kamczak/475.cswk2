@@ -85,7 +85,7 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void EndedCallEventForDifferentCallThanInitiatedThrowsException() {
+	public void EndedCallEventForDifferentCallThanInitiatedIsIgnored() {
 		// Arrange
 		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
 		UnexpectedCallException exception = null;
@@ -93,16 +93,9 @@ public class CustomerCallLogTests {
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
-		try {
-			log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
-		} catch (UnexpectedCallException e) {
-			exception = e;
-		}
-		
-		// Assert
-		Assert.assertNotNull(exception);
-		Assert.assertEquals(exception.getMessage(),
-				"Call completed event for different call than initialised.");
+		log.callCompleted(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+		//Assert
+		Assert.assertTrue(log.getCalls(FIRST_CUSTOMER).isEmpty());
 	}
 
 	@Test
@@ -130,6 +123,26 @@ public class CustomerCallLogTests {
 		
 		// Assert
 		Assert.assertEquals(1, calls.size());
+	}
+	
+	@Test
+	public void LogReturnsCallsJustForAGivenCustomer() {
+		// Arrange
+		m.checking(new Expectations() {{
+		    allowing(clock).getCurrentTime();
+		            will(returnValue(SAT_NOV_26_1700.getMillis()));
+		}});
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
+		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
+		log.callInitiated(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+		log.callCompleted(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+		// Act
+		List<Call> calls = log.getCalls(SECOND_CUSTOMER);
+		
+		// Assert
+		Assert.assertEquals(1, calls.size());
+		Call c = calls.get(0);
+		Assert.assertEquals(OTHER_CUSTOMER_NUMBER, c.callee());
 	}
 
 	private void setUpClock(long[] values) {
