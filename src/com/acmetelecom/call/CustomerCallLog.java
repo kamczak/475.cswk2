@@ -1,8 +1,6 @@
 package com.acmetelecom.call;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,42 +21,40 @@ public class CustomerCallLog implements CallLog {
 	}
 	
 	@Override
-	public void callInitiated(Customer caller, Customer callee) {
-		CallEvent currentCall = currentCalls.get(caller.getPhoneNumber());
-		if(currentCall != null){
+	public void callInitiated(String caller, String callee) {
+		CallEvent currentCall = currentCalls.get(caller);
+		if (currentCall != null) {
 			throw new UnexpectedCallException("Call initiated twice for same number.");
 		}
-		//store an event marking the initialisation of the phone call
-		currentCalls.put(caller.getPhoneNumber(), 
-				new CallEvent(caller,callee, clock.getCurrentTime()));
+
+		// Store an event marking the initialisation of the phone call
+		currentCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentTime()));
 	}
 
 	@Override
-	public void callCompleted(Customer caller, Customer callee) {
-		String key = caller.getPhoneNumber();
-		CallEvent begin = currentCalls.get(key);
-		
-		//Check for error cases
-		if(begin == null){
+	public void callCompleted(String caller, String callee) {
+		CallEvent begin = currentCalls.get(caller);
+		if (begin == null) {
 		    return;
-			//throw new UnexpectedCallException("Call completed event received without initialization.");
 		}
-		if(!begin.getCallee().equals(callee.getPhoneNumber())){
+
+		if (!begin.getCallee().equals(callee)){
 			throw new UnexpectedCallException("Call completed event for different call than initialised.");
 		}
-		
-		//remove the beginning event stored
-		currentCalls.remove(key);
+
+		// Remove the beginning event stored
+		currentCalls.remove(caller);
 		CallEvent end = new CallEvent(caller, callee, clock.getCurrentTime());
-		List<Call> calls = userCalls.get(key);
-		//setup initial list of calls
+		List<Call> calls = userCalls.get(caller);
+
+		// Setup initial list of calls
 		if(calls == null){
 			calls = new ArrayList<Call>(10);
-			userCalls.put(key, calls);
+			userCalls.put(caller, calls);
 		}
-		//add new call to the list
-		Call newCall = new Call(begin, end);
-		calls.add(newCall);
+
+		// Add new call to the list
+		calls.add(new Call(begin, end));
 	}
 
 	@Override

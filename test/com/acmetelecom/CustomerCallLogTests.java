@@ -1,33 +1,27 @@
 package com.acmetelecom;
 
-import java.util.Collection;
 import java.util.List;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.jmock.Expectations;
 import org.jmock.api.Action;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.joda.time.DateTime;
 import org.junit.Rule;
 import org.junit.Test;
 
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CustomerCallLog;
 import com.acmetelecom.call.UnexpectedCallException;
-import com.acmetelecom.customer.Customer;
-import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.time.Clock;
 
+import static com.acmetelecom.FakeCustomers.*;
+
 public class CustomerCallLogTests {
+    private static final DateTime SAT_NOV_26_1700 = new DateTime("2011-11-26T17:00:00");
 	@Rule
 	public final JUnitRuleMockery m = new JUnitRuleMockery();
-	private final Customer cust1 = new Customer("Customer1", "111111",
-			Tariff.Standard.name());
-	private final Customer cust2 = new Customer("Customer2", "222222",
-			Tariff.Business.name());
-	private final Customer cust3 = new Customer("Customer3", "333333",
-			Tariff.Business.name());
 
 	private Clock clock = m.mock(Clock.class);
 	private CustomerCallLog log = new CustomerCallLog(clock);
@@ -35,10 +29,10 @@ public class CustomerCallLogTests {
 	@Test
 	public void CallInitiatedCallsOnSystemClock() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L });
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
 		
 		// Act
-		log.callInitiated(cust1, cust2);
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Assert
 		m.assertIsSatisfied();
@@ -47,11 +41,11 @@ public class CustomerCallLogTests {
 	@Test
 	public void CallEndedCallsOnSystemClock() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L, 1322326800000L });
-		log.callInitiated(cust1, cust2);
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis(), SAT_NOV_26_1700.getMillis() });
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
-		log.callCompleted(cust1, cust2);
+		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Assert
 		m.assertIsSatisfied();
@@ -60,14 +54,14 @@ public class CustomerCallLogTests {
 	@Test
 	public void TwoCallsInitiatedForSameCustomerThrowsException() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L });
-		;
-		log.callInitiated(cust1, cust2);
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		UnexpectedCallException exception = null;
 		
 		// Act
 		try {
-			log.callInitiated(cust1, cust2);
+			log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		} catch (UnexpectedCallException e) {
 			exception = e;
 		}
@@ -79,35 +73,28 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void EndedCallEventWithouthCallInitializedThrowsException() {
+	public void EndedCallWithouthCallInitializedIsIgnored() {
 		// Arrange
-		UnexpectedCallException exception = null;
 		log = new CustomerCallLog(clock);
 
 		// Act
-		try {
-			log.callCompleted(cust1, cust2);
-		} catch (UnexpectedCallException e) {
-			exception = e;
-		}
+		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 
 		// Assert
-		Assert.assertNotNull(exception);
-		Assert.assertEquals(exception.getMessage(),
-				"Call completed event received without initialization.");
+		Assert.assertTrue(log.getCalls(FIRST_CUSTOMER).isEmpty());
 	}
 
 	@Test
 	public void EndedCallEventForDifferentCallThanInitiatedThrowsException() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L });
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
 		UnexpectedCallException exception = null;
 		log = new CustomerCallLog(clock);
-		log.callInitiated(cust1, cust2);
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
 		try {
-			log.callCompleted(cust1, cust3);
+			log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		} catch (UnexpectedCallException e) {
 			exception = e;
 		}
@@ -119,27 +106,27 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void NullLogForJustInitiatedCalls() {
+	public void EmptyLogForJustInitiatedCalls() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L });
-		log.callInitiated(cust1, cust2);
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
-		List<Call> calls = log.getCalls(cust1);
+		List<Call> calls = log.getCalls(FIRST_CUSTOMER);
 		
 		// Assert
-		Assert.assertNull(calls);
+		Assert.assertTrue(calls.isEmpty());
 	}
 
 	@Test
 	public void LogReturnedForFinishedCall() {
 		// Arrange
-		setUpClock(new long[] { 1322326800000L, 1322326800000L });
-		log.callInitiated(cust1, cust2);
-		log.callCompleted(cust1, cust2);
+		setUpClock(new long[] { SAT_NOV_26_1700.getMillis(), SAT_NOV_26_1700.getMillis() });
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
+		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
-		List<Call> calls = log.getCalls(cust1);
+		List<Call> calls = log.getCalls(FIRST_CUSTOMER);
 		
 		// Assert
 		Assert.assertEquals(1, calls.size());
@@ -148,13 +135,13 @@ public class CustomerCallLogTests {
 	private void setUpClock(long[] values) {
 		final int n = values.length;
 		final Action[] returnValues = new Action[n];
+
 		for (int i = 0; i < n; i++)
 			returnValues[i] = Expectations.returnValue(values[i]);
-		m.checking(new Expectations() {
-			{
-				exactly(n).of(clock).getCurrentTime();
-				will(onConsecutiveCalls(returnValues));
-			}
-		});
+
+		m.checking(new Expectations() {{
+		    exactly(n).of(clock).getCurrentTime();
+		            will(onConsecutiveCalls(returnValues));
+		}});
 	}
 }

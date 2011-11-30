@@ -1,14 +1,11 @@
 package com.acmetelecom.bill;
 
 import com.acmetelecom.call.Call;
-import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallLog;
-import com.acmetelecom.customer.CentralTariffDatabase;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
-import com.acmetelecom.time.Clock;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,22 +16,20 @@ public class BillingSystem {
     private TariffLibrary _tariffDatabase;
     private CallLog _callLog;
     private BillGenerator _billGenerator;
-    private Clock _clock;
 
     public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
-            CallLog callLog, BillGenerator billGenerator, Clock clock) {
+            CallLog callLog, BillGenerator billGenerator) {
         _customerDatabase = customerDatabase;
         _tariffDatabase = tariffDatabase;
         _callLog = callLog;
-        _clock = clock;
         _billGenerator = billGenerator;
     }
 
-    public void callInitiated(Customer caller, Customer callee) {
+    public void callInitiated(String caller, String callee) {
         _callLog.callInitiated(caller, callee);
     }
 
-    public void callCompleted(Customer caller, Customer callee) {
+    public void callCompleted(String caller, String callee) {
         _callLog.callCompleted(caller, callee);
     }
 

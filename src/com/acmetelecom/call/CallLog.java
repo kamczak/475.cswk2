@@ -1,6 +1,5 @@
 package com.acmetelecom.call;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.acmetelecom.customer.Customer;

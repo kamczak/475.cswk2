@@ -15,52 +15,30 @@ import com.acmetelecom.call.CallLog;
 import com.acmetelecom.call.CustomerCallLog;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
-import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
 
 import static com.acmetelecom.ListSizeMatcher.aListOfSize;
+import static com.acmetelecom.FakeCustomers.*;
 
+/**
+ * This is a set of regressions tests for the functionality of the BillingSystem.
+ */
 public class BillingSystemTest {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
 
-    // mocked BillGenerator
-    BillGenerator billGenerator = context.mock(BillGenerator.class);
-
-    // mocked Clock, epoch calculator: http://tinyurl.com/u85od
-    Clock clock = context.mock(Clock.class);
-
-    // mocked TariffLibrary
-    TariffLibrary tariffDB = context.mock(TariffLibrary.class);
-
-    // mocked CustomerDatabase
-    CustomerDatabase customerDB = context.mock(CustomerDatabase.class);
+    // mocks
+    BillGenerator    billGenerator = context.mock(BillGenerator.class);
+    TariffLibrary    tariffLibrary = context.mock(TariffLibrary.class);
+    CustomerDatabase customerDB    = context.mock(CustomerDatabase.class);
+    Clock            clock         = context.mock(Clock.class);
     
     // real CallLog
     CallLog callLog = new CustomerCallLog(clock);
 
     // real BillingSystem, initialised with the mocked objects
-    BillingSystem billingSystem = new BillingSystem(customerDB, tariffDB, callLog, billGenerator, clock);
-
-    // fake customers
-    private static final String FIRST_CUSTOMER_NAME = "Fred Bloggs";
-    private static final String FIRST_CUSTOMER_NUMBER = "447711232343";
-    private static final Tariff FIRST_CUSTOMER_TARIFF = Tariff.Standard;
-    private static final Customer FIRST_CUSTOMER = new Customer(FIRST_CUSTOMER_NAME,
-            FIRST_CUSTOMER_NUMBER, FIRST_CUSTOMER_TARIFF.name());
-
-    private static final String SECOND_CUSTOMER_NAME = "Joe Doe";
-    private static final String SECOND_CUSTOMER_NUMBER = "447722232355";
-    private static final Tariff SECOND_CUSTOMER_TARIFF = Tariff.Leisure;
-    private static final Customer SECOND_CUSTOMER = new Customer(SECOND_CUSTOMER_NAME,
-            SECOND_CUSTOMER_NUMBER, SECOND_CUSTOMER_TARIFF.name());
-    
-    private static final String OTHER_CUSTOMER_NAME = "Otter Joenes";
-    private static final String OTHER_CUSTOMER_NUMBER = "447722232366";
-    private static final Tariff OTHER_CUSTOMER_TARIFF = Tariff.Leisure;
-    private static final Customer OTHER_CUSTOMER = new Customer(OTHER_CUSTOMER_NAME,
-            OTHER_CUSTOMER_NUMBER, OTHER_CUSTOMER_TARIFF.name());
+    BillingSystem billingSystem = new BillingSystem(customerDB, tariffLibrary, callLog, billGenerator);
 
     @SuppressWarnings("serial")
     private static final List<Customer> ONE_CUSTOMER_LIST = new ArrayList<Customer>(1) {
@@ -89,7 +67,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis())
                                             ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -101,8 +79,8 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -119,7 +97,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis())
                                            ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -131,8 +109,8 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -149,7 +127,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis())
                                             ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -161,8 +139,8 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -178,7 +156,7 @@ public class BillingSystemTest {
             will(onConsecutiveCalls(returnValue(start.getMillis()),
                                     returnValue(end.getMillis())));
 
-            allowing(tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing(tariffLibrary).tarriffFor(FIRST_CUSTOMER);
             will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing(customerDB).getCustomers();
@@ -188,8 +166,8 @@ public class BillingSystemTest {
                     with(equal("36.00")));
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -206,7 +184,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis())
                                             ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -218,8 +196,8 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -236,7 +214,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis())
                                             ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -248,8 +226,8 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -263,7 +241,7 @@ public class BillingSystemTest {
             allowing (clock).getCurrentTime();
                     will(returnValue(start.getMillis()));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -275,7 +253,7 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -289,7 +267,7 @@ public class BillingSystemTest {
             allowing (clock).getCurrentTime();
                     will(returnValue(start.getMillis()));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -301,7 +279,7 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -320,7 +298,7 @@ public class BillingSystemTest {
                                             returnValue(end.getMillis()),
                                             returnValue(start.getMillis())));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -332,13 +310,13 @@ public class BillingSystemTest {
                                        );
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
@@ -359,9 +337,9 @@ public class BillingSystemTest {
                                     returnValue(end.getMillis())
                                     ));
 
-            allowing (tariffDB).tarriffFor(FIRST_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
-            allowing (tariffDB).tarriffFor(SECOND_CUSTOMER);
+            allowing (tariffLibrary).tarriffFor(SECOND_CUSTOMER);
                     will(returnValue(SECOND_CUSTOMER_TARIFF));
 
             allowing (customerDB).getCustomers();
@@ -375,14 +353,14 @@ public class BillingSystemTest {
                                        with(any(String.class)));
         }});
 
-        billingSystem.callInitiated(FIRST_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(FIRST_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
-        billingSystem.callInitiated(SECOND_CUSTOMER, FIRST_CUSTOMER);
-        billingSystem.callCompleted(SECOND_CUSTOMER, FIRST_CUSTOMER);
+        billingSystem.callInitiated(SECOND_CUSTOMER_NUMBER, FIRST_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(SECOND_CUSTOMER_NUMBER, FIRST_CUSTOMER_NUMBER);
 
-        billingSystem.callInitiated(SECOND_CUSTOMER, OTHER_CUSTOMER);
-        billingSystem.callCompleted(SECOND_CUSTOMER, OTHER_CUSTOMER);
+        billingSystem.callInitiated(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+        billingSystem.callCompleted(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
         billingSystem.createCustomerBills();
     }
