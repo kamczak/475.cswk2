@@ -17,7 +17,6 @@ public class BillingSystem {
     private BillGenerator billGenerator;
     private Strategy strategy;
 
-    //tralalala
     public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
             CallLog callLog, Strategy strategy, BillGenerator billGenerator) {
         this.customerDatabase = customerDatabase;
