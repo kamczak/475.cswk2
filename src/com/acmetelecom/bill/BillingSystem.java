@@ -12,49 +12,49 @@ import java.math.RoundingMode;
 import java.util.*;
 
 public class BillingSystem {
-    private CustomerDatabase _customerDatabase;
-    private TariffLibrary _tariffDatabase;
-    private CallLog _callLog;
-    private BillGenerator _billGenerator;
+    private CustomerDatabase customerDatabase;
+    private TariffLibrary tariffDatabase;
+    private CallLog callLog;
+    private BillGenerator billGenerator;
 
     public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
             CallLog callLog, BillGenerator billGenerator) {
-        _customerDatabase = customerDatabase;
-        _tariffDatabase = tariffDatabase;
-        _callLog = callLog;
-        _billGenerator = billGenerator;
+        this.customerDatabase = customerDatabase;
+        this.tariffDatabase = tariffDatabase;
+        this.callLog = callLog;
+        this.billGenerator = billGenerator;
     }
 
     public void callInitiated(String caller, String callee) {
-        _callLog.callInitiated(caller, callee);
+        callLog.callInitiated(caller, callee);
     }
 
     public void callCompleted(String caller, String callee) {
-        _callLog.callCompleted(caller, callee);
+        callLog.callCompleted(caller, callee);
     }
 
     public void createCustomerBills() {
-        List<Customer> customers = _customerDatabase.getCustomers();
+        List<Customer> customers = customerDatabase.getCustomers();
         for (Customer customer : customers) {
             createBillFor(customer);
         }
     }
 
-    public void createCustomerBills(List<Customer> customers_) {
-        for (Customer customer : customers_) {
+    public void createCustomerBills(List<Customer> customers) {
+        for (Customer customer : customers) {
             createBillFor(customer);
         }
     }
 
     private void createBillFor(Customer customer) {
-        List<Call> calls = _callLog.getCalls(customer);
+        List<Call> calls = callLog.getCalls(customer);
 
         BigDecimal totalBill = new BigDecimal(0);
         List<LineItem> items = new ArrayList<LineItem>();
 
         for (Call call : calls) {
 
-            Tariff tariff = _tariffDatabase.tarriffFor(customer);
+            Tariff tariff = tariffDatabase.tarriffFor(customer);
 
             BigDecimal cost;
 
@@ -72,7 +72,7 @@ public class BillingSystem {
             items.add(new LineItem(call, callCost));
         }
 
-        _billGenerator.send(customer, items, MoneyFormatter.penceToPounds(totalBill));
+        billGenerator.send(customer, items, MoneyFormatter.penceToPounds(totalBill));
     }
 
     static class LineItem {
