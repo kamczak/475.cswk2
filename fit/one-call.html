@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <link href="files/css/fitnesse.css" rel="stylesheet" type="text/css" />
+
+    <title>Billing for one call for one customer</title>
+  </head>
+
+  <body><h1>Billing for one call for one customer</h1>
+  <table border="0" cellpadding="">
+     <tr>
+       <td>Initialise system</td>
+     </tr>
+   </table>
+   <table border="0" cellpadding="">
+     <tr>
+       <td colspan="3">Given the following customers</td>
+     </tr>
+     <tr>
+       <td>Name</td>
+       <td>Phone number</td>
+       <td>Price plan</td>
+     </tr>
+     <tr>
+       <td>Kowalski</td>
+       <td>123</td>
+       <td>Standard</td>
+     </tr>
+   </table>
+   <table border="0" cellpadding="">
+     <tr>
+       <td colspan="4">Given the following calls</td>
+     </tr>
+     <tr>
+       <td>Caller</td>
+       <td>Callee</td>
+       <td>Start</td>
+       <td>End</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>456</td>
+       <td>2011-11-28 23:05:00</td>
+       <td>2011-11-28 23:06:00</td>
+     </tr>
+   </table>
+    
+   <table border="0">
+     <tr>
+       <td>After bill generation</td>
+     </tr>
+   </table>
+   
+   <table border="0" cellpadding="">
+    <tr>
+      <td colspan="4">The customers charged are</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>Phone number</td>
+      <td>Price plan</td>
+      <td>Total</td>
+    </tr>
+    <tr>
+      <td>Kowalski</td>
+      <td>123</td>
+      <td>Standard</td>
+      <td>0,12</td>
+    </tr>
+  </table>
+  
+  <table border="0" cellpadding="">
+    <tr>
+      <td colspan="5">The calls charged are</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>Caller</td>
+      <td>Callee</td>
+      <td>Duration</td>
+      <td>Cost</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 23:05:00</td>
+      <td>123</td>
+      <td>456</td>
+      <td>1:00</td>
+      <td>0,12</td>
+    </tr>
+  </table>
+  
+  </body>
+</html>

@@ -6,7 +6,6 @@ import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -76,29 +75,29 @@ public class BillingSystem {
     }
 
     static class LineItem {
-        private Call call;
-        private BigDecimal callCost;
+	private Call call;
+	private BigDecimal callCost;
 
-        public LineItem(Call call, BigDecimal callCost) {
-            this.call = call;
-            this.callCost = callCost;
-        }
+	public LineItem(Call call, BigDecimal callCost) {
+	    this.call = call;
+	    this.callCost = callCost;
+	}
 
-        public String date() {
-            return call.date();
-        }
+	public Date date() {
+	    return call.startTime();
+	}
 
-        public String callee() {
-            return call.callee();
-        }
+	public String callee() {
+	    return call.callee();
+	}
 
-        public String durationMinutes() {
-            return "" + call.durationSeconds() / 60 + ":"
-                    + String.format("%02d", call.durationSeconds() % 60);
-        }
+	public String durationMinutes() {
+	    return "" + call.durationSeconds() / 60 + ":"
+		    + String.format("%02d", call.durationSeconds() % 60);
+	}
 
-        public BigDecimal cost() {
-            return callCost;
-        }
+	public BigDecimal cost() {
+	    return callCost;
+	}
     }
 }

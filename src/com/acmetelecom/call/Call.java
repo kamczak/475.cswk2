@@ -1,7 +1,8 @@
 package com.acmetelecom.call;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.acmetelecom.time.DateUtils;
 
 public class Call {
     private CallEvent start;
@@ -21,7 +22,7 @@ public class Call {
     }
 
     public String date() {
-        return SimpleDateFormat.getInstance().format(new Date(start.time()));
+	return DateUtils.dateToBillingFormat(new Date(start.time()));
     }
 
     public Date startTime() {

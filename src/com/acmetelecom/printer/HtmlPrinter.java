@@ -1,5 +1,9 @@
 package com.acmetelecom.printer;
 
+import java.util.Date;
+
+import com.acmetelecom.time.DateUtils;
+
 public class HtmlPrinter implements Printer {
 
     private static Printer instance = new HtmlPrinter();
@@ -30,8 +34,8 @@ public class HtmlPrinter implements Printer {
         return "<h2>" + text + "</h2>";
     }
 
-    public void printItem(String time, String callee, String duration, String cost) {
-        System.out.println(tr(td(time) + td(callee) + td(duration) + td(cost)));
+    public void printItem(Date time, String callee, String duration, String cost) {
+	System.out.println(tr(td(DateUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
     }
 
     private String tr(String text) {
