@@ -15,14 +15,16 @@ public class BillingSystem {
     private TariffLibrary tariffDatabase;
     private CallLog callLog;
     private BillGenerator billGenerator;
+    private Strategy strategy;
 
     //tralalala
     public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
-            CallLog callLog, BillGenerator billGenerator) {
+            CallLog callLog, Strategy strategy, BillGenerator billGenerator) {
         this.customerDatabase = customerDatabase;
         this.tariffDatabase = tariffDatabase;
         this.callLog = callLog;
         this.billGenerator = billGenerator;
+        this.strategy = strategy;
     }
 
     public void callInitiated(String caller, String callee) {

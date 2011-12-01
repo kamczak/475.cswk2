@@ -3,6 +3,7 @@ package com.acmetelecom;
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
 import com.acmetelecom.bill.PrintingBillGenerator;
+import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.CallLog;
 import com.acmetelecom.call.CustomerCallLog;
 import com.acmetelecom.customer.CentralTariffDatabase;
@@ -16,6 +17,7 @@ public class BillingSystemUnderTest {
     public static final BillGenerator billGenerator = new PrintingBillGenerator(printer);
     public static final FakeClock clock = new FakeClock();
     public static CallLog callLog;
+    public static Strategy strategy;
     public static BillingSystem billingSystem;
     
     public static void resetCustomerDatabase() {
@@ -33,6 +35,7 @@ public class BillingSystemUnderTest {
 	            customerDatabase,
 	            CentralTariffDatabase.getInstance(),
 	            callLog,
+	            strategy,
 	            billGenerator);
     }
 }

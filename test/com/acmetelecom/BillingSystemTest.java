@@ -1,5 +1,11 @@
 package com.acmetelecom;
 
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER;
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_NUMBER;
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_TARIFF;
+import static com.acmetelecom.FakeCustomers.ONE_CUSTOMER_LIST;
+import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,15 +17,13 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
+import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallLog;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.TariffLibrary;
 import com.acmetelecom.time.Clock;
-
-import static com.acmetelecom.ListSizeMatcher.aListOfSize;
-import static com.acmetelecom.FakeCustomers.*;
 
 /**
  * This is a set of regressions tests for the functionality of the BillingSystem.
@@ -34,9 +38,10 @@ public class BillingSystemTest {
     private CustomerDatabase customerDB    = context.mock(CustomerDatabase.class);
     private Clock            clock         = context.mock(Clock.class);
     private CallLog          mCallLog      = context.mock(CallLog.class);
+    private Strategy		 mStrategy	   = context.mock(Strategy.class);
 
     // real BillingSystem, initialised with the mocked objects
-    BillingSystem billingSystem = new BillingSystem(customerDB, tariffLibrary, mCallLog, billGenerator);
+    BillingSystem billingSystem = new BillingSystem(customerDB, tariffLibrary, mCallLog, mStrategy, billGenerator);
 
     @SuppressWarnings("unchecked")
     @Test
