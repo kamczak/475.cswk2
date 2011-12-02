@@ -8,10 +8,7 @@ import java.math.BigDecimal;
 
 import junit.framework.Assert;
 
-import org.jmock.Expectations;
-import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.joda.time.DateTime;
-import org.junit.Rule;
 import org.junit.Test;
 
 import com.acmetelecom.bill.Strategy;
