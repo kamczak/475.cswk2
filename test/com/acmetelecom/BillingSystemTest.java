@@ -6,6 +6,7 @@ import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_TARIFF;
 import static com.acmetelecom.FakeCustomers.ONE_CUSTOMER_LIST;
 import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,14 +50,17 @@ public class BillingSystemTest {
         final DateTime start = new DateTime("2011-01-01T06:00:00");
         final DateTime end   = start.plusMinutes(1);
         
+        final Call call = new Call(
+        		new CallEvent(FIRST_CUSTOMER_NUMBER,
+        				OTHER_CUSTOMER_NUMBER,
+            			start.getMillis()),
+            	new CallEvent(FIRST_CUSTOMER_NUMBER,
+                		OTHER_CUSTOMER_NUMBER,
+                		end.getMillis()));
+        
         final List<Call> callList = new ArrayList<Call>(1) {
             {
-                add(new Call(new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           start.getMillis()),
-                             new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           end.getMillis())));
+                add(call);
             }
         };
 
@@ -76,7 +80,10 @@ public class BillingSystemTest {
             oneOf (mCallLog).callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
             oneOf (mCallLog).getCalls(FIRST_CUSTOMER);
-                    will (returnValue(callList));
+                    will(returnValue(callList));
+                    
+            oneOf (mStrategy).getCost(FIRST_CUSTOMER_TARIFF, call);
+                    will(returnValue(new BigDecimal(12)));
 
             oneOf (billGenerator).send(with(same(FIRST_CUSTOMER)),
                                        with(aNonNull(List.class)),
@@ -96,14 +103,17 @@ public class BillingSystemTest {
         final DateTime start = new DateTime("2011-01-01T08:00:00");
         final DateTime end   = start.plusMinutes(1);
 
+        final Call call = new Call(
+        		new CallEvent(FIRST_CUSTOMER_NUMBER,
+        				OTHER_CUSTOMER_NUMBER,
+            			start.getMillis()),
+            	new CallEvent(FIRST_CUSTOMER_NUMBER,
+                		OTHER_CUSTOMER_NUMBER,
+                		end.getMillis()));
+        
         final List<Call> callList = new ArrayList<Call>(1) {
             {
-                add(new Call(new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           start.getMillis()),
-                             new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           end.getMillis())));
+                add(call);
             }
         };
 
@@ -123,7 +133,10 @@ public class BillingSystemTest {
             oneOf (mCallLog).callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
             oneOf (mCallLog).getCalls(FIRST_CUSTOMER);
-                    will (returnValue(callList));            
+                    will(returnValue(callList));            
+                    
+            oneOf (mStrategy).getCost(FIRST_CUSTOMER_TARIFF, call);
+                    will(returnValue(new BigDecimal(30)));                    
 
             oneOf (billGenerator).send(with(same(FIRST_CUSTOMER)),
                                        with(aNonNull(List.class)),
@@ -143,14 +156,17 @@ public class BillingSystemTest {
         final DateTime start = new DateTime("2011-01-01T06:00:00");
         final DateTime end   = start.plusHours(2);
         
+        final Call call = new Call(
+        		new CallEvent(FIRST_CUSTOMER_NUMBER,
+        				OTHER_CUSTOMER_NUMBER,
+            			start.getMillis()),
+            	new CallEvent(FIRST_CUSTOMER_NUMBER,
+                		OTHER_CUSTOMER_NUMBER,
+                		end.getMillis()));
+        
         final List<Call> callList = new ArrayList<Call>(1) {
             {
-                add(new Call(new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           start.getMillis()),
-                             new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           end.getMillis())));
+                add(call);
             }
         };
 
@@ -170,8 +186,11 @@ public class BillingSystemTest {
             oneOf (mCallLog).callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
             oneOf (mCallLog).getCalls(FIRST_CUSTOMER);
-                    will (returnValue(callList));
+                    will(returnValue(callList));
 
+            oneOf (mStrategy).getCost(FIRST_CUSTOMER_TARIFF, call);
+                    will(returnValue(new BigDecimal(3600)));
+                    
             oneOf (billGenerator).send(with(same(FIRST_CUSTOMER)),
                                        with(aNonNull(List.class)),
                                        with(equal("36.00"))
@@ -190,14 +209,17 @@ public class BillingSystemTest {
         final DateTime start = new DateTime("2011-01-01T18:00:00");
         final DateTime end   = start.plusHours(2);
         
+        final Call call = new Call(
+        		new CallEvent(FIRST_CUSTOMER_NUMBER,
+        				OTHER_CUSTOMER_NUMBER,
+            			start.getMillis()),
+            	new CallEvent(FIRST_CUSTOMER_NUMBER,
+                		OTHER_CUSTOMER_NUMBER,
+                		end.getMillis()));
+        
         final List<Call> callList = new ArrayList<Call>(1) {
             {
-                add(new Call(new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           start.getMillis()),
-                             new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           end.getMillis())));
+                add(call);
             }
         };
 
@@ -216,8 +238,11 @@ public class BillingSystemTest {
             oneOf (mCallLog).callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
             oneOf (mCallLog).getCalls(FIRST_CUSTOMER);
-                    will (returnValue(callList));
-
+                    will(returnValue(callList));
+                    
+            oneOf (mStrategy).getCost(FIRST_CUSTOMER_TARIFF, call);
+                    will(returnValue(new BigDecimal(3600)));
+                    
             oneOf(billGenerator).send(with(same(FIRST_CUSTOMER)), with(aNonNull(List.class)),
                     with(equal("36.00")));
         }});
@@ -234,14 +259,17 @@ public class BillingSystemTest {
         final DateTime start = new DateTime("2011-01-01T06:00:00");
         final DateTime end   = new DateTime("2011-01-01T20:00:00");
         
+        final Call call = new Call(
+        		new CallEvent(FIRST_CUSTOMER_NUMBER,
+        				OTHER_CUSTOMER_NUMBER,
+            			start.getMillis()),
+            	new CallEvent(FIRST_CUSTOMER_NUMBER,
+                		OTHER_CUSTOMER_NUMBER,
+                		end.getMillis()));
+        
         final List<Call> callList = new ArrayList<Call>(1) {
             {
-                add(new Call(new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           start.getMillis()),
-                             new CallEvent(FIRST_CUSTOMER_NUMBER,
-                                           OTHER_CUSTOMER_NUMBER,
-                                           end.getMillis())));
+                add(call);
             }
         };
 
@@ -261,7 +289,10 @@ public class BillingSystemTest {
             oneOf (mCallLog).callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
 
             oneOf (mCallLog).getCalls(FIRST_CUSTOMER);
-                    will (returnValue(callList));
+                    will(returnValue(callList));
+            
+            oneOf (mStrategy).getCost(FIRST_CUSTOMER_TARIFF, call);
+                    will(returnValue(new BigDecimal(25200)));        
 
             oneOf (billGenerator).send(with(same(FIRST_CUSTOMER)),
                                        with(aNonNull(List.class)),
@@ -271,7 +302,7 @@ public class BillingSystemTest {
 
         billingSystem.callInitiated(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
         billingSystem.callCompleted(FIRST_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
-
+        
         billingSystem.createCustomerBills();
     }
 }

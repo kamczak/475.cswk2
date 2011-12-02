@@ -1,8 +1,13 @@
 package com.acmetelecom;
 
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_NUMBER;
+import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
+
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
 import com.acmetelecom.bill.PrintingBillGenerator;
+import com.acmetelecom.call.Call;
+import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CustomerCallLog;
 import com.acmetelecom.customer.CentralCustomerDatabase;
 import com.acmetelecom.customer.CentralTariffDatabase;
@@ -34,7 +39,7 @@ public class Runner {
 		billingSystem.callCompleted("447722113434", "447766814143");
 		billingSystem.createCustomerBills();
 	}
-
+	
 	@SuppressWarnings("unused")
 	private static void runSimpleSetOfCalls() throws InterruptedException {
 		System.out.println("Running...");
