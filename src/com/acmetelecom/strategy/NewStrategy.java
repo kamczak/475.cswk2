@@ -21,7 +21,7 @@ public class NewStrategy implements Strategy {
 
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
-		Interval callInterval = new Interval(call.startTime(), call.endTime());
+		Interval callInterval = new Interval(call.startDateTime(), call.endTime());
 
 		Duration combinedPeakDuration = new Duration(0);
 		Interval overlap;

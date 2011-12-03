@@ -26,7 +26,7 @@ public class HtmlPrinter implements Printer {
     }
 
     public void printItem(DateTime time, String callee, String duration, String cost) {
-	System.out.println(tr(td(DateStringUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
+        System.out.println(tr(td(DateStringUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
     }
 
     private String tr(String text) {

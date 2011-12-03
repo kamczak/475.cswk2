@@ -16,7 +16,7 @@ class BillLineItem {
 	}
 
 	public DateTime date() {
-		return call.startTime();
+		return call.startDateTime();
 	}
 
 	public String callee() {

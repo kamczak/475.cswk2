@@ -22,8 +22,8 @@ public class Call {
 	public Duration getDuration() {
 	    return callInterval.toDuration();
 	}
-
-	public DateTime startTime() {
+	
+	public DateTime startDateTime() {
 		return start.dateTime();
 	}
 
