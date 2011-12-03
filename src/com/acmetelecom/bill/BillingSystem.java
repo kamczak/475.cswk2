@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallLog;
 import com.acmetelecom.customer.Customer;
@@ -42,10 +40,14 @@ public class BillingSystem {
 
 	public void createCustomerBills() {
 		List<Customer> customers = customerDatabase.getCustomers();
-		for (Customer customer : customers) {
-			createBillFor(customer);
-		}
+		createCustomerBills(customers);
 	}
+	
+	public void createCustomerBills(List<Customer> customers) {
+        for (Customer customer : customers) {
+            createBillFor(customer);
+        }
+    }
 
 	private void createBillFor(Customer customer) {
 		List<Call> calls = callLog.getCalls(customer);
