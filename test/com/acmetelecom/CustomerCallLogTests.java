@@ -29,7 +29,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void CallInitiatedCallsOnSystemClock() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
 		
 		// Act
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
@@ -41,7 +41,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void CallEndedCallsOnSystemClock() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis(), SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
@@ -54,7 +54,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void TwoCallsInitiatedForSameCustomerThrowsException() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
 
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		UnexpectedCallException exception = null;
@@ -87,7 +87,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void EndedCallEventForDifferentCallThanInitiatedIsIgnored() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700});
 		UnexpectedCallException exception = null;
 		log = new CustomerCallLog(clock);
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
@@ -101,7 +101,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void EmptyLogForJustInitiatedCalls() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
@@ -114,7 +114,7 @@ public class CustomerCallLogTests {
 	@Test
 	public void LogReturnedForFinishedCall() {
 		// Arrange
-		setUpClock(new long[] { SAT_NOV_26_1700.getMillis(), SAT_NOV_26_1700.getMillis() });
+		setUpClock(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
@@ -129,8 +129,8 @@ public class CustomerCallLogTests {
 	public void LogReturnsCallsJustForAGivenCustomer() {
 		// Arrange
 		m.checking(new Expectations() {{
-		    allowing(clock).getCurrentTime();
-		            will(returnValue(SAT_NOV_26_1700.getMillis()));
+		    allowing(clock).getCurrentDateTime();
+		            will(returnValue(SAT_NOV_26_1700));
 		}});
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
@@ -145,7 +145,7 @@ public class CustomerCallLogTests {
 		Assert.assertEquals(OTHER_CUSTOMER_NUMBER, c.callee());
 	}
 
-	private void setUpClock(long[] values) {
+	private void setUpClock(DateTime[] values) {
 		final int n = values.length;
 		final Action[] returnValues = new Action[n];
 
@@ -153,7 +153,7 @@ public class CustomerCallLogTests {
 			returnValues[i] = Expectations.returnValue(values[i]);
 
 		m.checking(new Expectations() {{
-		    exactly(n).of(clock).getCurrentTime();
+		    exactly(n).of(clock).getCurrentDateTime();
 		            will(onConsecutiveCalls(returnValues));
 		}});
 	}

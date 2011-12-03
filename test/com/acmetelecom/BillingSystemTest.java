@@ -53,10 +53,10 @@ public class BillingSystemTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
         
         final List<Call> callList = new ArrayList<Call>(1) {
             {
@@ -65,9 +65,9 @@ public class BillingSystemTest {
         };
 
         context.checking(new Expectations() {{
-            allowing (clock).getCurrentTime();
-                    will(onConsecutiveCalls(returnValue(start.getMillis()),
-                                            returnValue(end.getMillis())
+            allowing (clock).getCurrentDateTime();
+                    will(onConsecutiveCalls(returnValue(start),
+                                            returnValue(end)
                                             ));
 
             allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
@@ -106,10 +106,10 @@ public class BillingSystemTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
         
         final List<Call> callList = new ArrayList<Call>(1) {
             {
@@ -118,10 +118,10 @@ public class BillingSystemTest {
         };
 
         context.checking(new Expectations() {{
-            allowing (clock).getCurrentTime();
-                    will(onConsecutiveCalls(returnValue(start.getMillis()),
-                                            returnValue(end.getMillis())
-                                           ));
+            allowing (clock).getCurrentDateTime();
+                    will(onConsecutiveCalls(returnValue(start),
+                                            returnValue(end)
+                                            ));
 
             allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
                     will(returnValue(FIRST_CUSTOMER_TARIFF));
@@ -159,10 +159,10 @@ public class BillingSystemTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
         
         final List<Call> callList = new ArrayList<Call>(1) {
             {
@@ -171,9 +171,9 @@ public class BillingSystemTest {
         };
 
         context.checking(new Expectations() {{
-            allowing (clock).getCurrentTime();
-                    will(onConsecutiveCalls(returnValue(start.getMillis()),
-                                            returnValue(end.getMillis())
+            allowing (clock).getCurrentDateTime();
+                    will(onConsecutiveCalls(returnValue(start),
+                                            returnValue(end)
                                             ));
 
             allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);
@@ -212,10 +212,10 @@ public class BillingSystemTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
         
         final List<Call> callList = new ArrayList<Call>(1) {
             {
@@ -224,9 +224,10 @@ public class BillingSystemTest {
         };
 
         context.checking(new Expectations() {{
-            allowing(clock).getCurrentTime();
-            will(onConsecutiveCalls(returnValue(start.getMillis()),
-                                    returnValue(end.getMillis())));
+            allowing (clock).getCurrentDateTime();
+                    will(onConsecutiveCalls(returnValue(start),
+                                            returnValue(end)
+                                            ));
 
             allowing(tariffLibrary).tarriffFor(FIRST_CUSTOMER);
             will(returnValue(FIRST_CUSTOMER_TARIFF));
@@ -262,10 +263,10 @@ public class BillingSystemTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
         
         final List<Call> callList = new ArrayList<Call>(1) {
             {
@@ -274,9 +275,9 @@ public class BillingSystemTest {
         };
 
         context.checking(new Expectations() {{
-            allowing (clock).getCurrentTime();
-                    will(onConsecutiveCalls(returnValue(start.getMillis()),
-                                            returnValue(end.getMillis())
+            allowing (clock).getCurrentDateTime();
+                    will(onConsecutiveCalls(returnValue(start),
+                                            returnValue(end)
                                             ));
 
             allowing (tariffLibrary).tarriffFor(FIRST_CUSTOMER);

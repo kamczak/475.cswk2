@@ -31,10 +31,10 @@ public class OldStrategyTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
         Assert.assertEquals(cost, new BigDecimal(12));
@@ -48,10 +48,10 @@ public class OldStrategyTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
         Assert.assertEquals(cost, new BigDecimal(30));
@@ -65,10 +65,10 @@ public class OldStrategyTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
         Assert.assertEquals(cost, new BigDecimal(3600));
@@ -82,10 +82,10 @@ public class OldStrategyTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
         Assert.assertEquals(cost, new BigDecimal(3600));
@@ -99,10 +99,10 @@ public class OldStrategyTest {
         final Call call = new Call(
         		new CallEvent(FIRST_CUSTOMER_NUMBER,
         				OTHER_CUSTOMER_NUMBER,
-            			start.getMillis()),
+            			start),
             	new CallEvent(FIRST_CUSTOMER_NUMBER,
                 		OTHER_CUSTOMER_NUMBER,
-                		end.getMillis()));
+                		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
         Assert.assertEquals(cost, new BigDecimal(25200));

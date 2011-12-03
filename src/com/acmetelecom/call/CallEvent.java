@@ -1,14 +1,16 @@
 package com.acmetelecom.call;
 
+import org.joda.time.DateTime;
+
 public class CallEvent {
     private String caller;
     private String callee;
-    private long time;
+    private DateTime dateTime;
 
-    public CallEvent(String caller, String callee, long timeStamp) {
+    public CallEvent(String caller, String callee, DateTime timeStamp) {
         this.caller = caller;
         this.callee = callee;
-        this.time = timeStamp;
+        this.dateTime = timeStamp;
     }
 
     public String getCaller() {
@@ -19,7 +21,7 @@ public class CallEvent {
         return callee;
     }
 
-    public long time() {
-        return time;
+    public DateTime dateTime() {
+        return dateTime;
     }
 }

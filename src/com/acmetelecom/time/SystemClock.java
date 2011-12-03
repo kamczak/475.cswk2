@@ -1,12 +1,14 @@
 package com.acmetelecom.time;
 
+import org.joda.time.DateTime;
+
 public class SystemClock implements Clock
 {
 
 	@Override
-	public long getCurrentTime()
+	public DateTime getCurrentDateTime()
 	{
-		return System.currentTimeMillis();
+		return DateTime.now();
 	}
 
 }

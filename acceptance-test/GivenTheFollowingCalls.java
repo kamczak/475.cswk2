@@ -12,8 +12,8 @@ public class GivenTheFollowingCalls extends ColumnFixture {
 
 	public void execute() {
 		BillingSystemUnderTest.clock.setNextTwoTimes(
-				DateUtils.parseStringToLong(Start),
-				DateUtils.parseStringToLong(End));
+				DateUtils.parseStringToDateTime(Start),
+				DateUtils.parseStringToDateTime(End));
 		BillingSystemUnderTest.billingSystem.callInitiated(Caller, Callee);
 		BillingSystemUnderTest.billingSystem.callCompleted(Caller, Callee);
 	}

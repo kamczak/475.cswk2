@@ -20,6 +20,13 @@ public class OldStrategy implements Strategy {
 	public BigDecimal getCost(Tariff tariff, Call call) {
 		BigDecimal cost;
 		DaytimePeakPeriod peakPeriod = new DaytimePeakPeriod();
+//
+//		Interval peakPeriod2 = new DaytimePeakPeriod().getPeakTimePeriod();
+//		Interval callPeriod = new Interval(new Period(new LocalTime(call.startTime()), new LocalTime(call.endTime())));
+//
+//		if (peakPeriod2.overlaps(callPeriod)) {
+//			cost = new BigDecimal(call.durationSeconds()).multiply(tariff.offPeakRate());
+//		}
 		
 		if (peakPeriod.offPeak(call.startTime()) && peakPeriod.offPeak(call.endTime())
 				&& call.durationSeconds() < 12 * 60 * 60) {

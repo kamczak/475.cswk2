@@ -1,14 +1,16 @@
 package com.acmetelecom.bill;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallLog;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.*;
 
 public class BillingSystem {
 	private CustomerDatabase customerDatabase;

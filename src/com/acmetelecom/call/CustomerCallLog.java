@@ -28,7 +28,7 @@ public class CustomerCallLog implements CallLog {
 		}
 
 		// Store an event marking the initialisation of the phone call
-		currentCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentTime()));
+		currentCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentDateTime()));
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class CustomerCallLog implements CallLog {
 
 		// Remove the beginning event stored
 		currentCalls.remove(caller);
-		CallEvent end = new CallEvent(caller, callee, clock.getCurrentTime());
+		CallEvent end = new CallEvent(caller, callee, clock.getCurrentDateTime());
 		List<Call> calls = userCalls.get(caller);
 
 		// Setup initial list of calls

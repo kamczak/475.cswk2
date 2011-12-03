@@ -5,31 +5,31 @@ import java.util.Date;
 import com.acmetelecom.time.DateUtils;
 
 public class Call {
-    private CallEvent start;
-    private CallEvent end;
+	private CallEvent start;
+	private CallEvent end;
 
-    public Call(CallEvent start, CallEvent end) {
-        this.start = start;
-        this.end = end;
-    }
+	public Call(CallEvent start, CallEvent end) {
+		this.start = start;
+		this.end = end;
+	}
 
-    public String callee() {
-        return start.getCallee();
-    }
+	public String callee() {
+		return start.getCallee();
+	}
 
-    public int durationSeconds() { 
-        return (int) (((end.time() - start.time()) / 1000));
-    }
+	public int durationSeconds() { 
+		return  (int) (end.dateTime().toDate().getTime()-start.dateTime().toDate().getTime())/1000;
+	}
 
-    public String date() {
-	return DateUtils.dateToBillingFormat(new Date(start.time()));
-    }
+	public String date() {
+		return DateUtils.dateToBillingFormat(start.dateTime().toDate());
+	}
 
-    public Date startTime() {
-        return new Date(start.time());
-    }
+	public Date startTime() {
+		return start.dateTime().toDate();
+	}
 
-    public Date endTime() {
-        return new Date(end.time());
-    }
+	public Date endTime() {
+		return end.dateTime().toDate();
+	}
 }

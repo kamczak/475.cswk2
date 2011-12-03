@@ -1,7 +1,9 @@
 package com.acmetelecom.strategy;
 
 import java.math.BigDecimal;
-import org.joda.time.DateTime;
+
+import org.joda.time.Period;
+
 import com.acmetelecom.bill.DaytimePeakPeriod;
 import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
@@ -11,11 +13,10 @@ public class NewStrategy implements Strategy {
 
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
-		BigDecimal cost;
-		DaytimePeakPeriod peakPeriod = new DaytimePeakPeriod();
+		BigDecimal cost = null;
+//		Period peakPeriod = new DaytimePeakPeriod().getPeakTimePeriod();
 		
-		
-		return null;
+		return cost;
 	}
 
 }
