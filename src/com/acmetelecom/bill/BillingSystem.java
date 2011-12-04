@@ -32,12 +32,12 @@ public class BillingSystem {
 		this.strategy = strategy;
 	}
 
-	public void callInitiated(String caller, String callee) {
-		callLog.callInitiated(caller, callee);
+	public void callInitiated(String callerNumber, String calleeNumber) {
+		callLog.callInitiated(callerNumber, calleeNumber);
 	}
 
-	public void callCompleted(String caller, String callee) {
-		callLog.callCompleted(caller, callee);
+	public void callCompleted(String callerNumber, String calleeNumber) {
+		callLog.callCompleted(callerNumber, calleeNumber);
 	}
 
 	public void createCustomerBills() {
