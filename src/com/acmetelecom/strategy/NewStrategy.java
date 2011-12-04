@@ -2,11 +2,10 @@ package com.acmetelecom.strategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 
+import org.joda.time.Duration;
 import org.joda.time.Interval;
 
-import com.acmetelecom.bill.DaytimePeakPeriod;
 import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
@@ -15,23 +14,21 @@ public class NewStrategy implements Strategy {
 
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
-		BigDecimal cost = null;
-
 		Interval callInterval = new Interval(call.startTime(), call.endTime());
-		List<Interval> peakIntervals = new DaytimePeakPeriod().getPeakTimeIntervals(callInterval);
+
+		Duration combinedPeakDuration = new Duration(0);
+		for (Interval peakInterval : PeakPeriod.PEAK_7_TO_19.getOverlappingIntervals(callInterval)) {
+            combinedPeakDuration.plus(peakInterval.toDuration());
+        }
+
+		Duration combinedOffPeakDuration = callInterval.toDuration().minus(combinedPeakDuration);
 		
-		int peakDuration = 0;
-		for (Interval peakTime : peakIntervals) {
-			Interval overlap = callInterval.overlap(peakTime);
-			if (overlap != null) {
-				peakDuration += (int) overlap.toDuration().getStandardSeconds();
-			}
-		}
-		int offPeakDuration = (int) callInterval.toDuration().getStandardSeconds() - peakDuration;
-		
-		cost = new BigDecimal(peakDuration).multiply(tariff.peakRate()).add(new BigDecimal(offPeakDuration).multiply(tariff.offPeakRate()));
-		cost = cost.setScale(0, RoundingMode.HALF_UP);
-		return cost;
+		BigDecimal peakCost    = new BigDecimal(combinedPeakDuration.getMillis())
+		                                 .multiply(tariff.peakRate());
+		BigDecimal offPeakCost = new BigDecimal(combinedOffPeakDuration.getMillis())
+		                                 .multiply(tariff.offPeakRate());
+
+		return peakCost.add(offPeakCost).setScale(0, RoundingMode.HALF_UP);
 	}
 
 }
