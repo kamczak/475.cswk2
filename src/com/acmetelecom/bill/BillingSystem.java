@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
 
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallLog;
@@ -51,42 +50,15 @@ public class BillingSystem {
 		List<Call> calls = callLog.getCalls(customer);
 
 		BigDecimal totalBill = new BigDecimal(0);
-		List<LineItem> items = new ArrayList<LineItem>();
+		List<BillLineItem> items = new ArrayList<BillLineItem>();
 
 		for (Call call : calls) {
 			Tariff tariff = tariffDatabase.tarriffFor(customer);
 			BigDecimal callCost = strategy.getCost(tariff, call);
 			totalBill = totalBill.add(callCost);
-			items.add(new LineItem(call, callCost));
+			items.add(new BillLineItem(call, callCost));
 		}
 
 		billGenerator.send(customer, items, MoneyFormatter.penceToPounds(totalBill));
-	}
-
-	static class LineItem {
-		private Call call;
-		private BigDecimal callCost;
-
-		public LineItem(Call call, BigDecimal callCost) {
-			this.call = call;
-			this.callCost = callCost;
-		}
-
-		public DateTime date() {
-			return call.startTime();
-		}
-
-		public String callee() {
-			return call.callee();
-		}
-
-		public String durationMinutes() {
-			return "" + call.durationSeconds() / 60 + ":"
-			+ String.format("%02d", call.durationSeconds() % 60);
-		}
-
-		public BigDecimal cost() {
-			return callCost;
-		}
 	}
 }
