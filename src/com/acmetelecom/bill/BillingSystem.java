@@ -47,12 +47,6 @@ public class BillingSystem {
 		}
 	}
 
-	public void createCustomerBills(List<Customer> customers) {
-		for (Customer customer : customers) {
-			createBillFor(customer);
-		}
-	}
-
 	private void createBillFor(Customer customer) {
 		List<Call> calls = callLog.getCalls(customer);
 
