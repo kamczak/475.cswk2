@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.time.Clock;
+import com.google.inject.Inject;
 
 public class CustomerCallLog implements CallLog {
 
@@ -14,6 +15,7 @@ public class CustomerCallLog implements CallLog {
 	private Map<String, CallEvent> currentCalls;
 	private Clock clock;
 	
+	@Inject
 	public CustomerCallLog(Clock clock){
 		userCalls = new ConcurrentHashMap<String, List<Call>>();
 		currentCalls = new ConcurrentHashMap<String, CallEvent>();

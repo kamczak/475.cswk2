@@ -1,7 +1,5 @@
 package com.acmetelecom.call;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 
 import com.acmetelecom.time.DateUtils;
@@ -24,24 +22,14 @@ public class Call {
 	}
 
 	public String date() {
-		return DateUtils.dateToBillingFormat(start.dateTime().toDate());
+		return DateUtils.dateToBillingFormat(start.dateTime());
 	}
 
-	/* Do wyrzucenia */
-	public Date startTime() {
-		return start.dateTime().toDate();
-	}
-	
-	/* Do wyrzucenia */
-	public Date endTime() {
-		return end.dateTime().toDate();
-	}
-	
-	public DateTime startDateTime() {
+	public DateTime startTime() {
 		return start.dateTime();
 	}
 
-	public DateTime endDateTime() {
+	public DateTime endTime() {
 		return end.dateTime();
 	}
 }

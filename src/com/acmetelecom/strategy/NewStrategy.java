@@ -17,7 +17,7 @@ public class NewStrategy implements Strategy {
 	public BigDecimal getCost(Tariff tariff, Call call) {
 		BigDecimal cost = null;
 
-		Interval callInterval = new Interval(call.startDateTime(), call.endDateTime());
+		Interval callInterval = new Interval(call.startTime(), call.endTime());
 		List<Interval> peakIntervals = new DaytimePeakPeriod().getPeakTimeIntervals(callInterval);
 		
 		int peakDuration = 0;

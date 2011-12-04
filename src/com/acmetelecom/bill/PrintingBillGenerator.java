@@ -2,12 +2,14 @@ package com.acmetelecom.bill;
 
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.printer.Printer;
+import com.google.inject.Inject;
 
 import java.util.List;
 
 public class PrintingBillGenerator implements BillGenerator {
     private Printer printer;
 
+    @Inject
     public PrintingBillGenerator(Printer printer) {
         this.printer = printer;
     }

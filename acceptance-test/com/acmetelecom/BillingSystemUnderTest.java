@@ -18,7 +18,7 @@ public class BillingSystemUnderTest {
 	public static final BillGenerator billGenerator = new PrintingBillGenerator(printer);
 	public static final FakeClock clock = new FakeClock();
 	public static CallLog callLog;
-	public static Strategy strategy;
+	public static Strategy strategy = new OldStrategy();;
 	public static BillingSystem billingSystem;
 
 	public static void resetCustomerDatabase() {
@@ -32,7 +32,7 @@ public class BillingSystemUnderTest {
 		// billGenerator can stay as it is
 		clock.reset();
 		callLog = new CustomerCallLog(clock);
-		strategy = OldStrategy.getInstance();
+		// strategy is stateless
 		billingSystem = new BillingSystem(
 				customerDatabase,
 				CentralTariffDatabase.getInstance(),
