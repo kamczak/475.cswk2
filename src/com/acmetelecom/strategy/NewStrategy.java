@@ -22,9 +22,11 @@ public class NewStrategy implements Strategy {
 		
 		int peakDuration = 0;
 		for (Interval peakTime : peakIntervals) {
-			peakDuration += (int) callInterval.overlap(peakTime).toDuration().getStandardSeconds();
+			Interval overlap = callInterval.overlap(peakTime);
+			if (overlap != null) {
+				peakDuration += (int) overlap.toDuration().getStandardSeconds();
+			}
 		}
-		
 		int offPeakDuration = (int) callInterval.toDuration().getStandardSeconds() - peakDuration;
 		
 		cost = new BigDecimal(peakDuration).multiply(tariff.peakRate()).add(new BigDecimal(offPeakDuration).multiply(tariff.offPeakRate()));
