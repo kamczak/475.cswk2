@@ -15,23 +15,19 @@ public class OldStrategy implements Strategy {
 
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
-		BigDecimal cost = null;
-
 		Interval callInterval = new Interval(call.startTime(), call.endTime());
-		List<Interval> peakIntervals = new DaytimePeakPeriod().getPeakTimeIntervals(callInterval);
-
-		for (Interval peakTime : peakIntervals) {
-			if (callInterval.overlaps(peakTime)) {
-				cost = new BigDecimal(call.durationSeconds()).multiply(tariff.peakRate());
-				break;
-			}
-		}
-		if (cost == null) {
-			cost = new BigDecimal(call.durationSeconds()).multiply(tariff.offPeakRate());
-		}
 		
-		cost = cost.setScale(0, RoundingMode.HALF_UP);
-		return cost;
+		BigDecimal multiplyRate;
+		if (PeakPeriod.PEAK_7_TO_19.getOverlappingIntervals(callInterval).isEmpty()) {
+		    multiplyRate = tariff.offPeakRate();
+		}
+		else {
+		    multiplyRate = tariff.peakRate();
+		}
+
+		return new BigDecimal(call.durationSeconds())
+		        .multiply(multiplyRate)
+		        .setScale(0, RoundingMode.HALF_UP);
 	}
 
 }

@@ -9,7 +9,8 @@ import org.joda.time.LocalTime;
 import org.joda.time.Period;
 
 public class PeakPeriod {
-    private static final PeakPeriod PEAK_7_TO_19 = new PeakPeriod(new LocalTime(7,0), new LocalTime(19,0));
+    public static final PeakPeriod PEAK_7_TO_19 = new PeakPeriod(new LocalTime(7,0), new LocalTime(19,0));
+
     private LocalTime start;
     private LocalTime end;
     private Period period;
