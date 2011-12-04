@@ -1,6 +1,5 @@
 package com.acmetelecom.bill;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,8 +23,8 @@ public class DaytimePeakPeriod {
 		return peakIntervals;
 	}
 
-	public boolean offPeak(Date time) {
-        LocalTime in = LocalTime.fromDateFields(time);
-        return in.isBefore(peakStartTime) || !in.isBefore(peakEndTime);
-    }    
+//	public boolean offPeak(Date time) {
+//        LocalTime in = LocalTime.fromDateFields(time);
+//        return in.isBefore(peakStartTime) || !in.isBefore(peakEndTime);
+//    }    
 }

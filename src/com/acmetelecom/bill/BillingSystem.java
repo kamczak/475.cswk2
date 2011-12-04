@@ -2,8 +2,9 @@ package com.acmetelecom.bill;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallLog;
@@ -11,6 +12,8 @@ import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
+import com.google.inject.Inject;
+
 
 public class BillingSystem {
 	private CustomerDatabase customerDatabase;
@@ -19,6 +22,7 @@ public class BillingSystem {
 	private BillGenerator billGenerator;
 	private Strategy strategy;
 
+	@Inject
 	public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
 			CallLog callLog, Strategy strategy, BillGenerator billGenerator) {
 		this.customerDatabase = customerDatabase;
@@ -74,7 +78,7 @@ public class BillingSystem {
 			this.callCost = callCost;
 		}
 
-		public Date date() {
+		public DateTime date() {
 			return call.startTime();
 		}
 

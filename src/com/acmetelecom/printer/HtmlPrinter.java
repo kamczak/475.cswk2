@@ -1,19 +1,10 @@
 package com.acmetelecom.printer;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import com.acmetelecom.time.DateUtils;
 
 public class HtmlPrinter implements Printer {
-
-    private static Printer instance = new HtmlPrinter();
-
-    private HtmlPrinter() {
-    }
-
-    public static Printer getInstance() {
-        return instance;
-    }
 
     public void printHeading(String name, String phoneNumber, String pricePlan) {
         beginHtml();
@@ -34,7 +25,7 @@ public class HtmlPrinter implements Printer {
         return "<h2>" + text + "</h2>";
     }
 
-    public void printItem(Date time, String callee, String duration, String cost) {
+    public void printItem(DateTime time, String callee, String duration, String cost) {
 	System.out.println(tr(td(DateUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
     }
 

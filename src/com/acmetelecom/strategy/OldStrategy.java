@@ -13,17 +13,11 @@ import com.acmetelecom.customer.Tariff;
 
 public class OldStrategy implements Strategy {
 
-	private static Strategy instance = new OldStrategy();
-	
-	public static Strategy getInstance() {
-		return instance;
-	}
-
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
 		BigDecimal cost = null;
 
-		Interval callInterval = new Interval(call.startDateTime(), call.endDateTime());
+		Interval callInterval = new Interval(call.startTime(), call.endTime());
 		List<Interval> peakIntervals = new DaytimePeakPeriod().getPeakTimeIntervals(callInterval);
 
 		for (Interval peakTime : peakIntervals) {

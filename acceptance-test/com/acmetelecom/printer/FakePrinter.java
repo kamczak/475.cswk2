@@ -1,8 +1,9 @@
 package com.acmetelecom.printer;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import com.acmetelecom.time.DateUtils;
 
@@ -29,7 +30,7 @@ public class FakePrinter implements Printer {
 	}
 
 	@Override
-	public void printItem(Date time, String callee, String duration, String cost) {
+	public void printItem(DateTime time, String callee, String duration, String cost) {
 		calls.add(new Call(time, currentNumber, callee, duration, cost));
 	}
 
@@ -130,7 +131,7 @@ public class FakePrinter implements Printer {
 	public static class Call {
 		final private String time, caller, callee, duration, cost;
 
-		public Call(Date time, String caller, String callee, String duration, String cost) {
+		public Call(DateTime time, String caller, String callee, String duration, String cost) {
 			this.time = DateUtils.dateToString(time);
 			this.caller = caller;
 			this.callee = callee;
