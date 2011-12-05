@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 
+//Stores information about the beginning and end event of each call
 public class Call {
 	private CallEvent start;
 	private CallEvent end;

@@ -10,32 +10,36 @@ import com.acmetelecom.time.Clock;
 import com.google.inject.Inject;
 
 public class CustomerCallLog implements CallLog {
-
+	
+	//Stores calls of each phone number
 	private Map<String, List<Call>> userCalls;
-	private Map<String, CallEvent> currentCalls;
+	//Stores partial call began by each user
+	private Map<String, CallEvent> initiatedCalls;
+	//System clock
 	private Clock clock;
 	
 	@Inject
 	public CustomerCallLog(Clock clock){
+		//We use concurrent hash map to make sure the system works in
+		// distributed environment
 		userCalls = new ConcurrentHashMap<String, List<Call>>();
-		currentCalls = new ConcurrentHashMap<String, CallEvent>();
+		initiatedCalls = new ConcurrentHashMap<String, CallEvent>();
 		this.clock = clock;
 	}
 	
 	@Override
 	public void callInitiated(String caller, String callee) {
-		CallEvent currentCall = currentCalls.get(caller);
+		CallEvent currentCall = initiatedCalls.get(caller);
 		if (currentCall != null) {
 			throw new UnexpectedCallException("Call initiated twice for same number.");
 		}
-
 		// Store an event marking the initialisation of the phone call
-		currentCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentDateTime()));
+		initiatedCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentDateTime()));
 	}
 
 	@Override
 	public void callCompleted(String caller, String callee) {
-		CallEvent begin = currentCalls.get(caller);
+		CallEvent begin = initiatedCalls.get(caller);
 		if (begin == null) {
 		    return;
 		}
@@ -43,9 +47,8 @@ public class CustomerCallLog implements CallLog {
 		if (!begin.getCallee().equals(callee)){
 			throw new UnexpectedCallException("Call completed event for different call than initialised.");
 		}
-
 		// Remove the beginning event stored
-		currentCalls.remove(caller);
+		initiatedCalls.remove(caller);
 		CallEvent end = new CallEvent(caller, callee, clock.getCurrentDateTime());
 		List<Call> calls = userCalls.get(caller);
 
@@ -54,7 +57,6 @@ public class CustomerCallLog implements CallLog {
 			calls = new ArrayList<Call>(10);
 			userCalls.put(caller, calls);
 		}
-
 		// Add new call to the list
 		calls.add(new Call(begin, end));
 	}
