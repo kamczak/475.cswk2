@@ -11,10 +11,10 @@ import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.strategy.OldStrategy;
+import com.acmetelecom.strategy.Strategy;
 
 /**
  * This is a set of regressions tests for the functionality of the BillingSystem.

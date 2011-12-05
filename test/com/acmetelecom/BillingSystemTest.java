@@ -18,12 +18,12 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallLog;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.TariffLibrary;
+import com.acmetelecom.strategy.Strategy;
 import com.acmetelecom.time.Clock;
 
 /**

@@ -10,6 +10,7 @@ import com.acmetelecom.printer.HtmlPrinter;
 import com.acmetelecom.printer.Printer;
 import com.acmetelecom.strategy.NewStrategy;
 import com.acmetelecom.strategy.OldStrategy;
+import com.acmetelecom.strategy.Strategy;
 import com.acmetelecom.time.Clock;
 import com.acmetelecom.time.SystemClock;
 import com.google.inject.AbstractModule;

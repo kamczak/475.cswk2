@@ -6,7 +6,6 @@ import java.math.RoundingMode;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
 
