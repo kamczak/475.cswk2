@@ -1,28 +1,28 @@
 package com.acmetelecom.call;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Interval;
 
 import com.acmetelecom.time.DateStringUtils;
 
 public class Call {
 	private CallEvent start;
 	private CallEvent end;
+	private Interval callInterval;
 
 	public Call(CallEvent start, CallEvent end) {
 		this.start = start;
 		this.end = end;
+		callInterval = new Interval(start.dateTime(), end.dateTime());
 	}
 
 	public String callee() {
 		return start.getCallee();
 	}
-
-	public int durationSeconds() { 
-		return  (int) (end.dateTime().toDate().getTime()-start.dateTime().toDate().getTime())/1000;
-	}
-
-	public String date() {
-		return DateStringUtils.dateToBillingFormat(start.dateTime());
+	
+	public Duration getDuration() {
+	    return callInterval.toDuration();
 	}
 
 	public DateTime startTime() {

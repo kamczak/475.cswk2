@@ -24,10 +24,12 @@ class BillLineItem {
 	}
 
 	public String durationMinutes() {
+	    long durationSeconds = call.getDuration().getStandardSeconds();
+	    
 	    StringBuilder minutes = new StringBuilder();
-	    minutes.append(call.durationSeconds() / 60);
+	    minutes.append(durationSeconds / 60);
 		minutes.append(":");
-		minutes.append(String.format("%02d", call.durationSeconds() % 60));
+		minutes.append(String.format("%02d", durationSeconds % 60));
 		return minutes.toString();
 	}
 

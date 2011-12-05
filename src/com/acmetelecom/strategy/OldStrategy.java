@@ -23,7 +23,7 @@ public class OldStrategy implements Strategy {
 		    multiplyRate = tariff.peakRate();
 		}
 
-		return new BigDecimal(call.durationSeconds())
+		return new BigDecimal(call.getDuration().getStandardSeconds())
 		        .multiply(multiplyRate)
 		        .setScale(0, RoundingMode.HALF_UP);
 	}
