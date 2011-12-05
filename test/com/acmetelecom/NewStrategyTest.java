@@ -18,8 +18,7 @@ public class NewStrategyTest extends StrategyTestBase {
     public void initialiseStrategy() {
         // Lazy initialization
         if (mStrategy == null) {
-            mStrategy = new NewStrategy(new DailyPeakPeriod(new LocalTime(7, 0), new LocalTime(19,
-                    0)));
+            mStrategy = new NewStrategy(new DailyPeakPeriod(new LocalTime(7, 0), new LocalTime(19, 0)));
         }
     }
 
