@@ -37,7 +37,7 @@ public class OldStrategyTest {
                 		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
-        Assert.assertEquals(cost, new BigDecimal(12));
+        Assert.assertEquals(new BigDecimal(12), cost);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class OldStrategyTest {
                 		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
-        Assert.assertEquals(cost, new BigDecimal(3600));
+        Assert.assertEquals(new BigDecimal(3600), cost);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class OldStrategyTest {
                 		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
-        Assert.assertEquals(cost, new BigDecimal(3600));
+        Assert.assertEquals(new BigDecimal(3600), cost);
     }
 
     @Test
@@ -105,6 +105,6 @@ public class OldStrategyTest {
                 		end));
 
         BigDecimal cost = mStrategy.getCost(FIRST_CUSTOMER_TARIFF, call);
-        Assert.assertEquals(cost, new BigDecimal(25200));
+        Assert.assertEquals(new BigDecimal(25200), cost);
     }
 }
