@@ -2,7 +2,7 @@ package com.acmetelecom.printer;
 
 import org.joda.time.DateTime;
 
-import com.acmetelecom.time.DateUtils;
+import com.acmetelecom.time.DateStringUtils;
 
 public class HtmlPrinter implements Printer {
 
@@ -26,7 +26,7 @@ public class HtmlPrinter implements Printer {
     }
 
     public void printItem(DateTime time, String callee, String duration, String cost) {
-	System.out.println(tr(td(DateUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
+	System.out.println(tr(td(DateStringUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
     }
 
     private String tr(String text) {

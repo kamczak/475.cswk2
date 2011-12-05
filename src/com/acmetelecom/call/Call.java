@@ -2,7 +2,7 @@ package com.acmetelecom.call;
 
 import org.joda.time.DateTime;
 
-import com.acmetelecom.time.DateUtils;
+import com.acmetelecom.time.DateStringUtils;
 
 public class Call {
 	private CallEvent start;
@@ -22,7 +22,7 @@ public class Call {
 	}
 
 	public String date() {
-		return DateUtils.dateToBillingFormat(start.dateTime());
+		return DateStringUtils.dateToBillingFormat(start.dateTime());
 	}
 
 	public DateTime startTime() {
