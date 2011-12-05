@@ -1,5 +1,6 @@
 package com.acmetelecom.call;
 
+//Exception for the purpose of erroneous events happening within CallLog
 public class UnexpectedCallException extends RuntimeException{
 
 	/**
