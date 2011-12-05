@@ -34,13 +34,18 @@ public class PeakPeriod {
          * We consider one more day to ensure that we don't terminate too early.
          */ 
         DateTime currentStart = timeInterval.getStart();
+        DateTime calculationEnd = timeInterval.getEnd().plusDays(1);
         Interval peakInterval;
-        while (currentStart.isBefore(timeInterval.getEnd().plusDays(1))) {
+        Interval overlap;
+        while (currentStart.isBefore(calculationEnd)) {
             // peak interval of the length as this.period ending on the same day
             // as the currently being considered.
             peakInterval = new Interval(this.period, currentStart.withHourOfDay(this.end.getHourOfDay()));
-            overlappingIntervals.add(peakInterval.overlap(timeInterval));
-            currentStart.plusDays(1);
+            overlap = peakInterval.overlap(timeInterval);
+            if (overlap != null) {
+                overlappingIntervals.add(overlap);
+            }
+            currentStart = currentStart.plusDays(1);
         }
         
         return overlappingIntervals;

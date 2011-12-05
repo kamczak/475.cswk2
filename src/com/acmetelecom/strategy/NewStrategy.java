@@ -18,14 +18,14 @@ public class NewStrategy implements Strategy {
 
 		Duration combinedPeakDuration = new Duration(0);
 		for (Interval peakInterval : PeakPeriod.PEAK_7_TO_19.getOverlappingIntervals(callInterval)) {
-            combinedPeakDuration.plus(peakInterval.toDuration());
+            combinedPeakDuration = combinedPeakDuration.plus(peakInterval.toDuration());
         }
 
 		Duration combinedOffPeakDuration = callInterval.toDuration().minus(combinedPeakDuration);
 		
-		BigDecimal peakCost    = new BigDecimal(combinedPeakDuration.getMillis())
+		BigDecimal peakCost    = new BigDecimal(combinedPeakDuration.getStandardSeconds())
 		                                 .multiply(tariff.peakRate());
-		BigDecimal offPeakCost = new BigDecimal(combinedOffPeakDuration.getMillis())
+		BigDecimal offPeakCost = new BigDecimal(combinedOffPeakDuration.getStandardSeconds())
 		                                 .multiply(tariff.offPeakRate());
 
 		return peakCost.add(offPeakCost).setScale(0, RoundingMode.HALF_UP);
