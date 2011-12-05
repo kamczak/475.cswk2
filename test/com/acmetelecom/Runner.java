@@ -1,7 +1,7 @@
 package com.acmetelecom;
 
-import com.acmetelecom.bill.BillingSystemModule;
 import com.acmetelecom.bill.BillingSystem;
+import com.acmetelecom.bill.BillingSystemModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

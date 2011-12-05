@@ -1,5 +1,11 @@
 package com.acmetelecom;
 
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER;
+import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_NUMBER;
+import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
+import static com.acmetelecom.FakeCustomers.SECOND_CUSTOMER;
+import static com.acmetelecom.FakeCustomers.SECOND_CUSTOMER_NUMBER;
+
 import java.util.List;
 
 import junit.framework.Assert;
@@ -15,8 +21,6 @@ import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CustomerCallLog;
 import com.acmetelecom.call.UnexpectedCallException;
 import com.acmetelecom.time.Clock;
-
-import static com.acmetelecom.FakeCustomers.*;
 
 public class CustomerCallLogTests {
     private static final DateTime SAT_NOV_26_1700 = new DateTime("2011-11-26T17:00:00");
