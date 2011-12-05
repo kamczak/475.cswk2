@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import com.acmetelecom.time.DateUtils;
+import com.acmetelecom.time.DateStringUtils;
 
 public class FakePrinter implements Printer {
 
@@ -132,7 +132,7 @@ public class FakePrinter implements Printer {
 		final private String time, caller, callee, duration, cost;
 
 		public Call(DateTime time, String caller, String callee, String duration, String cost) {
-			this.time = DateUtils.dateToString(time);
+			this.time = DateStringUtils.dateToString(time);
 			this.caller = caller;
 			this.callee = callee;
 			this.duration = duration;

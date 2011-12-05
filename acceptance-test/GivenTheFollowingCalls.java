@@ -2,7 +2,7 @@
 
 
 import com.acmetelecom.BillingSystemUnderTest;
-import com.acmetelecom.time.DateUtils;
+import com.acmetelecom.time.DateStringUtils;
 
 import fit.ColumnFixture;
 
@@ -12,8 +12,8 @@ public class GivenTheFollowingCalls extends ColumnFixture {
 
 	public void execute() {
 		BillingSystemUnderTest.clock.setNextTwoTimes(
-				DateUtils.parseStringToDateTime(Start),
-				DateUtils.parseStringToDateTime(End));
+				DateStringUtils.parseStringToDateTime(Start),
+				DateStringUtils.parseStringToDateTime(End));
 		BillingSystemUnderTest.billingSystem.callInitiated(Caller, Callee);
 		BillingSystemUnderTest.billingSystem.callCompleted(Caller, Callee);
 	}
