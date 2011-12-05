@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <link href="../files/css/fitnesse.css" rel="stylesheet" type="text/css" />
+
+    <title>Billing for multiple calls for one customer</title>
+  </head>
+
+  <body><h1>Billing for multiple calls for one customer</h1>
+  <table border="0" cellpadding="">
+     <tr>
+       <td>Using old strategy</td>
+     </tr>
+   </table>
+  <table border="0" cellpadding="">
+     <tr>
+       <td>Initialise system</td>
+     </tr>
+   </table>
+  <table border="0" cellpadding="">
+     <tr>
+       <td colspan="3">Given the following customers</td>
+     </tr>
+     <tr>
+       <td>Name</td>
+       <td>Phone number</td>
+       <td>Price plan</td>
+     </tr>
+     <tr>
+       <td>Kowalski</td>
+       <td>123</td>
+       <td>Standard</td>
+     </tr>
+   </table>
+   <table border="0" cellpadding="">
+     <tr>
+       <td colspan="4">Given the following calls</td>
+     </tr>
+     <tr>
+       <td>Caller</td>
+       <td>Callee</td>
+       <td>Start</td>
+       <td>End</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>200</td>
+       <td>2011-11-28 06:55:00</td>
+       <td>2011-11-28 07:06:00</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>201</td>
+       <td>2011-11-28 09:07:00</td>
+       <td>2011-11-28 09:09:15</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>202</td>
+       <td>2011-11-28 18:52:00</td>
+       <td>2011-11-28 19:03:00</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>203</td>
+       <td>2011-11-29 06:30:00</td>
+       <td>2011-11-29 21:00:00</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>204</td>
+       <td>2011-11-29 23:35:00</td>
+       <td>2011-11-29 23:36:01</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>205</td>
+       <td>2011-11-29 23:56:00</td>
+       <td>2011-11-30 00:06:00</td>
+     </tr>
+      <tr>
+       <td>123</td>
+       <td>206</td>
+       <td>2011-11-30 18:35:00</td>
+       <td>2011-12-01 07:06:00</td>
+     </tr>
+   </table>
+    
+   <table border="0">
+     <tr>
+       <td>After bill generation</td>
+     </tr>
+   </table>
+   
+   <table border="0" cellpadding="">
+    <tr>
+      <td colspan="4">The customers charged are</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>Phone number</td>
+      <td>Price plan</td>
+      <td>Total</td>
+    </tr>
+    <tr>
+      <td>Kowalski</td>
+      <td>123</td>
+      <td>Standard</td>
+      <td>494.90</td>
+    </tr>
+  </table>
+  
+  <table border="0" cellpadding="">
+    <tr>
+      <td colspan="5">The calls charged are</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>Caller</td>
+      <td>Callee</td>
+      <td>Duration</td>
+      <td>Cost</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 06:55:00</td>
+      <td>123</td>
+      <td>200</td>
+      <td>11:00</td>
+      <td>3.30</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 09:07:00</td>
+      <td>123</td>
+      <td>201</td>
+      <td>2:15</td>
+      <td>0.68</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 18:52:00</td>
+      <td>123</td>
+      <td>202</td>
+      <td>11:00</td>
+      <td>3.30</td>
+    </tr>
+    <tr>
+      <td>2011-11-29 06:30:00</td>
+      <td>123</td>
+      <td>203</td>
+      <td>870:00</td>
+      <td>261.00</td>
+    </tr>
+    <tr>
+      <td>2011-11-29 23:35:00</td>
+      <td>123</td>
+      <td>204</td>
+      <td>1:01</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>2011-11-29 23:56:00</td>
+      <td>123</td>
+      <td>205</td>
+      <td>10:00</td>
+      <td>1.20</td>
+    </tr>
+    <tr>
+      <td>2011-11-30 18:35:00</td>
+      <td>123</td>
+      <td>206</td>
+      <td>751:00</td>
+      <td>225.30</td>
+    </tr>
+  </table>
+  
+  </body>
+</html>

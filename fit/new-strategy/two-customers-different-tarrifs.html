@@ -3,12 +3,17 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <link href="files/css/fitnesse.css" rel="stylesheet" type="text/css" />
+    <link href="../files/css/fitnesse.css" rel="stylesheet" type="text/css" />
 
     <title>Billing for two customers on different tariffs</title>
   </head>
 
   <body><h1>Billing for two customers on different tariffs</h1>
+  <table border="0" cellpadding="">
+     <tr>
+       <td>Using new strategy</td>
+     </tr>
+   </table>
   <table border="0" cellpadding="">
     <tr>
       <td>Initialise system</td>
@@ -47,6 +52,18 @@
     <tr>
       <td>123</td>
       <td>456</td>
+      <td>2011-11-28 16:05:00</td>
+      <td>2011-11-28 16:06:00</td>
+    </tr>
+    <tr>
+      <td>456</td>
+      <td>123</td>
+      <td>2011-11-28 16:07:00</td>
+      <td>2011-11-28 16:08:00</td>
+    </tr>
+    <tr>
+      <td>123</td>
+      <td>456</td>
       <td>2011-11-28 23:05:00</td>
       <td>2011-11-28 23:06:00</td>
     </tr>
@@ -78,13 +95,13 @@
       <td>Kowalski</td>
       <td>123</td>
       <td>Standard</td>
-      <td>0.12</td>
+      <td>0.42</td>
     </tr>
     <tr>
       <td>Nowak</td>
       <td>456</td>
       <td>Business</td>
-      <td>0.18</td>
+      <td>0.36</td>
     </tr>
   </table>
   
@@ -98,6 +115,20 @@
       <td>Callee</td>
       <td>Duration</td>
       <td>Cost</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 16:05:00</td>
+      <td>123</td>
+      <td>456</td>
+      <td>1:00</td>
+      <td>0.30</td>
+    </tr>
+     <tr>
+      <td>2011-11-28 16:07:00</td>
+      <td>456</td>
+      <td>123</td>
+      <td>1:00</td>
+      <td>0.18</td>
     </tr>
     <tr>
       <td>2011-11-28 23:05:00</td>

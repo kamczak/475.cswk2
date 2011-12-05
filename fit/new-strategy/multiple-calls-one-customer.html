@@ -3,13 +3,17 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <link href="files/css/fitnesse.css" rel="stylesheet" type="text/css" />
+    <link href="../files/css/fitnesse.css" rel="stylesheet" type="text/css" />
 
     <title>Billing for multiple calls for one customer</title>
   </head>
 
   <body><h1>Billing for multiple calls for one customer</h1>
-  
+  <table border="0" cellpadding="">
+     <tr>
+       <td>Using new strategy</td>
+     </tr>
+   </table>
   <table border="0" cellpadding="">
      <tr>
        <td>Initialise system</td>
@@ -42,27 +46,45 @@
      </tr>
      <tr>
        <td>123</td>
-       <td>456</td>
-       <td>2011-11-28 23:05:00</td>
-       <td>2011-11-28 23:06:00</td>
+       <td>200</td>
+       <td>2011-11-28 06:55:00</td>
+       <td>2011-11-28 07:06:00</td>
      </tr>
      <tr>
        <td>123</td>
-       <td>789</td>
-       <td>2011-11-28 23:07:00</td>
-       <td>2011-11-28 23:09:00</td>
+       <td>201</td>
+       <td>2011-11-28 09:07:00</td>
+       <td>2011-11-28 09:09:15</td>
      </tr>
      <tr>
        <td>123</td>
-       <td>741</td>
-       <td>2011-11-28 23:52:00</td>
-       <td>2011-11-29 00:03:00</td>
+       <td>202</td>
+       <td>2011-11-28 18:52:00</td>
+       <td>2011-11-28 19:03:00</td>
      </tr>
      <tr>
        <td>123</td>
-       <td>456</td>
-       <td>2011-11-29 15:35:00</td>
-       <td>2011-11-29 15:36:00</td>
+       <td>203</td>
+       <td>2011-11-29 06:30:00</td>
+       <td>2011-11-29 21:00:00</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>204</td>
+       <td>2011-11-29 23:35:00</td>
+       <td>2011-11-29 23:36:01</td>
+     </tr>
+     <tr>
+       <td>123</td>
+       <td>205</td>
+       <td>2011-11-29 23:56:00</td>
+       <td>2011-11-30 00:06:00</td>
+     </tr>
+      <tr>
+       <td>123</td>
+       <td>206</td>
+       <td>2011-11-30 18:35:00</td>
+       <td>2011-12-01 07:06:00</td>
      </tr>
    </table>
     
@@ -86,7 +108,7 @@
       <td>Kowalski</td>
       <td>123</td>
       <td>Standard</td>
-      <td>1.98</td>
+      <td>336.86</td>
     </tr>
   </table>
   
@@ -102,32 +124,53 @@
       <td>Cost</td>
     </tr>
     <tr>
-      <td>2011-11-28 23:05:00</td>
+      <td>2011-11-28 06:55:00</td>
       <td>123</td>
-      <td>456</td>
-      <td>1:00</td>
+      <td>200</td>
+      <td>11:00</td>
+      <td>2.40</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 09:07:00</td>
+      <td>123</td>
+      <td>201</td>
+      <td>2:15</td>
+      <td>0.68</td>
+    </tr>
+    <tr>
+      <td>2011-11-28 18:52:00</td>
+      <td>123</td>
+      <td>202</td>
+      <td>11:00</td>
+      <td>2.76</td>
+    </tr>
+    <tr>
+      <td>2011-11-29 06:30:00</td>
+      <td>123</td>
+      <td>203</td>
+      <td>870:00</td>
+      <td>234.00</td>
+    </tr>
+    <tr>
+      <td>2011-11-29 23:35:00</td>
+      <td>123</td>
+      <td>204</td>
+      <td>1:01</td>
       <td>0.12</td>
     </tr>
     <tr>
-      <td>2011-11-28 23:07:00</td>
+      <td>2011-11-29 23:56:00</td>
       <td>123</td>
-      <td>789</td>
-      <td>2:00</td>
-      <td>0.24</td>
+      <td>205</td>
+      <td>10:00</td>
+      <td>1.20</td>
     </tr>
     <tr>
-      <td>2011-11-28 23:52:00</td>
+      <td>2011-11-30 18:35:00</td>
       <td>123</td>
-      <td>741</td>
-      <td>11:00</td>
-      <td>1.32</td>
-    </tr>
-    <tr>
-      <td>2011-11-29 15:35:00</td>
-      <td>123</td>
-      <td>456</td>
-      <td>1:00</td>
-      <td>0.30</td>
+      <td>206</td>
+      <td>751:00</td>
+      <td>95.70</td>
     </tr>
   </table>
   
