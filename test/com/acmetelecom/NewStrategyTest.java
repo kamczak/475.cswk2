@@ -9,11 +9,13 @@ import java.math.BigDecimal;
 import junit.framework.Assert;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 import org.junit.Test;
 
 import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
+import com.acmetelecom.peak.DailyPeakPeriod;
 import com.acmetelecom.strategy.NewStrategy;
 
 /**
@@ -21,7 +23,7 @@ import com.acmetelecom.strategy.NewStrategy;
  */
 public class NewStrategyTest {
 
-    private Strategy mStrategy = new NewStrategy();
+    private Strategy mStrategy = new NewStrategy(new DailyPeakPeriod(new LocalTime(7,0), new LocalTime(19,0)));
 
     @Test
     public void calculatesOffPeakCallCorrectly() {
