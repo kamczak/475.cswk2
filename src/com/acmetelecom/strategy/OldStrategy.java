@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.joda.time.Interval;
 
-import com.acmetelecom.bill.DaytimePeakPeriod;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
 
