@@ -8,7 +8,6 @@ import org.joda.time.Interval;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 
-import com.acmetelecom.strategy.PeakPeriod;
 
 public class DailyPeakPeriod implements PeakPeriod {
     private LocalTime end;

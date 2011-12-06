@@ -5,16 +5,16 @@ import java.math.RoundingMode;
 
 import org.joda.time.Interval;
 
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
+import com.acmetelecom.peak.PeakPeriod;
 import com.google.inject.Inject;
 
-public class OldStrategy implements Strategy {
+public class AggresivePeakCharging implements ChargingStrategy {
     private PeakPeriod peakPeriod;
     
     @Inject
-    public OldStrategy(PeakPeriod peakPeriod) {
+    public AggresivePeakCharging(PeakPeriod peakPeriod) {
         this.peakPeriod = peakPeriod;
     }
 

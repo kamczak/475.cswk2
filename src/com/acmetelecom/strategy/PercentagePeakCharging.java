@@ -6,16 +6,16 @@ import java.math.RoundingMode;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
+import com.acmetelecom.peak.PeakPeriod;
 import com.google.inject.Inject;
 
-public class NewStrategy implements Strategy {
+public class PercentagePeakCharging implements ChargingStrategy {
     private PeakPeriod peakPeriod;
     
     @Inject
-    public NewStrategy(PeakPeriod peakPeriod) {
+    public PercentagePeakCharging(PeakPeriod peakPeriod) {
         this.peakPeriod = peakPeriod;
     }
 
@@ -33,12 +33,10 @@ public class NewStrategy implements Strategy {
         }
 
 		Duration combinedOffPeakDuration = callInterval.toDuration().minus(combinedPeakDuration);
-
 		BigDecimal peakCost    = new BigDecimal(combinedPeakDuration.getStandardSeconds())
 		                                 .multiply(tariff.peakRate());
 		BigDecimal offPeakCost = new BigDecimal(combinedOffPeakDuration.getStandardSeconds())
 		                                 .multiply(tariff.offPeakRate());
-
 		return peakCost.add(offPeakCost).setScale(0, RoundingMode.HALF_UP);
 	}
 

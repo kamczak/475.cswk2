@@ -17,10 +17,10 @@ import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.junit.Rule;
 
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
-import com.acmetelecom.strategy.PeakPeriod;
+import com.acmetelecom.peak.PeakPeriod;
+import com.acmetelecom.strategy.ChargingStrategy;
 
 /**
  * Acts as a base class and implements the actual logic of all the tests for strategies.
@@ -44,7 +44,7 @@ public abstract class StrategyTestScenarios {
     
     PeakPeriod peakPeriod = context.mock(PeakPeriod.class);
 
-    protected Strategy mStrategy;
+    protected ChargingStrategy mStrategy;
     
     private void executeAndTestOneCall(DateTime start, Duration duration, BigDecimal expectedCost) {
         final DateTime end   = start.plus(duration);

@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import com.acmetelecom.bill.BillGenerator;
 import com.acmetelecom.bill.BillingSystem;
-import com.acmetelecom.bill.Strategy;
 import com.acmetelecom.call.Call;
 import com.acmetelecom.call.CallEvent;
 import com.acmetelecom.call.CallLog;
@@ -23,10 +22,12 @@ import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
+import com.acmetelecom.strategy.ChargingStrategy;
 
 /**
- * This is a set of regressions tests for the functionality of the BillingSystem.
+ * This is a set of integration tests for the functionality of the BillingSystem.
  */
+@SuppressWarnings("unchecked")
 public class BillingSystemTest {
     @Rule
     public final JUnitRuleMockery context = new JUnitRuleMockery();
@@ -36,7 +37,7 @@ public class BillingSystemTest {
     private TariffLibrary    tariffLibrary = context.mock(TariffLibrary.class);
     private CustomerDatabase customerDB    = context.mock(CustomerDatabase.class);
     private CallLog          callLog       = context.mock(CallLog.class);
-    private Strategy		 strategy	   = context.mock(Strategy.class);
+    private ChargingStrategy		 strategy	   = context.mock(ChargingStrategy.class);
 
     // real BillingSystem, initialised with the mocked objects
     BillingSystem billingSystem = new BillingSystem(customerDB, tariffLibrary, callLog, strategy, billGenerator);
@@ -117,7 +118,7 @@ public class BillingSystemTest {
     	context.assertIsSatisfied();
     }
     
-    @Test
+	@Test
     public void createBillForMethodGivenListOfCallsInvokesTariffDatabaseAndStrategy(){
     	//Arrange 
     	final List<Customer> fakeCustomers = new ArrayList<Customer>();

@@ -3,6 +3,7 @@ package com.acmetelecom.bill;
 import java.math.BigDecimal;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import com.acmetelecom.call.Call;
 
@@ -15,22 +16,16 @@ class BillLineItem {
 		this.callCost = callCost;
 	}
 
-	public DateTime date() {
+	public DateTime getDate() {
 		return call.getStartDateTime();
 	}
 
-	public String callee() {
+	public String getCallee() {
 		return call.getCallee();
 	}
 
-	public String durationMinutes() {
-	    long durationSeconds = call.getDuration().getStandardSeconds();
-	    
-	    StringBuilder minutes = new StringBuilder();
-	    minutes.append(durationSeconds / 60);
-		minutes.append(":");
-		minutes.append(String.format("%02d", durationSeconds % 60));
-		return minutes.toString();
+	public Duration getDuration() {
+	    return call.getDuration();
 	}
 
 	public BigDecimal cost() {

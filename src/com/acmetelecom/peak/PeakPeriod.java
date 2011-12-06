@@ -1,4 +1,4 @@
-package com.acmetelecom.strategy;
+package com.acmetelecom.peak;
 
 import java.util.List;
 

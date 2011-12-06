@@ -92,7 +92,6 @@ public class CustomerCallLogTests {
 	public void EndedCallEventForDifferentCallThanInitiatedIsIgnored() {
 		// Arrange
 		setUpClock(new DateTime[] { SAT_NOV_26_1700});
-		UnexpectedCallException exception = null;
 		log = new CustomerCallLog(clock);
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		

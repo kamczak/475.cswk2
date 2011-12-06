@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.acmetelecom.strategy.OldStrategy;
+import com.acmetelecom.strategy.AggresivePeakCharging;
 
 public class OldStrategyTest extends StrategyTestScenarios {
 
     @Before
     public void initialiseStrategy() {
-        mStrategy = new OldStrategy(peakPeriod);
+        mStrategy = new AggresivePeakCharging(peakPeriod);
     }
 
     @Test

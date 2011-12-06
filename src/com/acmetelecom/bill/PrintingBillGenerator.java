@@ -3,6 +3,7 @@ package com.acmetelecom.bill;
 import java.util.List;
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.printer.Printer;
+import com.acmetelecom.time.DateStringUtils;
 import com.google.inject.Inject;
 
 public class PrintingBillGenerator implements BillGenerator {
@@ -18,7 +19,8 @@ public class PrintingBillGenerator implements BillGenerator {
                 customer.getPricePlan());
 
         for (BillLineItem call : calls) {
-            printer.printItem(call.date(), call.callee(), call.durationMinutes(),
+            printer.printItem(call.getDate(), call.getCallee(), 
+            		DateStringUtils.durationToFormattedString(call.getDuration()),
                     MoneyFormatter.penceToPounds(call.cost()));
         }
 

@@ -10,21 +10,21 @@ import com.acmetelecom.customer.Customer;
 import com.acmetelecom.customer.CustomerDatabase;
 import com.acmetelecom.customer.Tariff;
 import com.acmetelecom.customer.TariffLibrary;
+import com.acmetelecom.strategy.ChargingStrategy;
 import com.google.inject.Inject;
-
 
 public class BillingSystem {
 	private CustomerDatabase customerDatabase;
-	private TariffLibrary tariffDatabase;
+	private TariffLibrary tariffLibrary;
 	private CallLog callLog;
 	private BillGenerator billGenerator;
-	private Strategy strategy;
+	private ChargingStrategy strategy;
 
 	@Inject
-	public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffDatabase,
-			CallLog callLog, Strategy strategy, BillGenerator billGenerator) {
+	public BillingSystem(CustomerDatabase customerDatabase, TariffLibrary tariffLibrary, CallLog callLog, ChargingStrategy strategy,
+			BillGenerator billGenerator) {
 		this.customerDatabase = customerDatabase;
-		this.tariffDatabase = tariffDatabase;
+		this.tariffLibrary = tariffLibrary;
 		this.callLog = callLog;
 		this.billGenerator = billGenerator;
 		this.strategy = strategy;
@@ -42,12 +42,12 @@ public class BillingSystem {
 		List<Customer> customers = customerDatabase.getCustomers();
 		createCustomerBills(customers);
 	}
-	
+
 	public void createCustomerBills(List<Customer> customers) {
-        for (Customer customer : customers) {
-            createBillFor(customer);
-        }
-    }
+		for (Customer customer : customers) {
+			createBillFor(customer);
+		}
+	}
 
 	private void createBillFor(Customer customer) {
 		List<Call> calls = callLog.getCalls(customer);
@@ -56,12 +56,11 @@ public class BillingSystem {
 		List<BillLineItem> items = new ArrayList<BillLineItem>();
 
 		for (Call call : calls) {
-			Tariff tariff = tariffDatabase.tarriffFor(customer);
+			Tariff tariff = tariffLibrary.tarriffFor(customer);
 			BigDecimal callCost = strategy.getCost(tariff, call);
 			totalBill = totalBill.add(callCost);
 			items.add(new BillLineItem(call, callCost));
 		}
-
 		billGenerator.generateBill(customer, items, MoneyFormatter.penceToPounds(totalBill));
 	}
 }
