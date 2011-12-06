@@ -2,24 +2,16 @@ package com.acmetelecom;
 
 import java.math.BigDecimal;
 
-import org.joda.time.LocalTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.acmetelecom.peak.DailyPeakPeriod;
 import com.acmetelecom.strategy.OldStrategy;
 
-/**
- * This is a set of regressions tests for the functionality of the BillingSystem.
- */
-public class OldStrategyTest extends StrategyTestBase {
+public class OldStrategyTest extends StrategyTestScenarios {
 
     @Before
     public void initialiseStrategy() {
-        // Lazy initialization
-        if (mStrategy == null) {
-            mStrategy = new OldStrategy(new DailyPeakPeriod(new LocalTime(7, 0), new LocalTime(19, 0)));
-        }
+        mStrategy = new OldStrategy(peakPeriod);
     }
 
     @Test
@@ -46,5 +38,9 @@ public class OldStrategyTest extends StrategyTestBase {
     public void calculatesOverlappingBothPeakCallCorrectly() {
         calculatesOverlappingBothPeakCallCorrectly(new BigDecimal(25200));
     }
+    
+    @Test
+    public void calculatesOverlappingTwoPeaksCallCorrectly() {
+        calculatesOverlappingTwoPeaksCallCorrectly(new BigDecimal(28800));
+    }
 }
-
