@@ -1,8 +1,8 @@
-package com.acmetelecom;
+package com.acmetelecom.bill;
 
-import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER;
-import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_NUMBER;
-import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
+import static com.acmetelecom.common.FakeCustomers.FIRST_CUSTOMER;
+import static com.acmetelecom.common.FakeCustomers.FIRST_CUSTOMER_NUMBER;
+import static com.acmetelecom.common.FakeCustomers.OTHER_CUSTOMER_NUMBER;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

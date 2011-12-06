@@ -1,10 +1,10 @@
-package com.acmetelecom;
+package com.acmetelecom.call;
 
-import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER;
-import static com.acmetelecom.FakeCustomers.FIRST_CUSTOMER_NUMBER;
-import static com.acmetelecom.FakeCustomers.OTHER_CUSTOMER_NUMBER;
-import static com.acmetelecom.FakeCustomers.SECOND_CUSTOMER;
-import static com.acmetelecom.FakeCustomers.SECOND_CUSTOMER_NUMBER;
+import static com.acmetelecom.common.FakeCustomers.FIRST_CUSTOMER;
+import static com.acmetelecom.common.FakeCustomers.FIRST_CUSTOMER_NUMBER;
+import static com.acmetelecom.common.FakeCustomers.OTHER_CUSTOMER_NUMBER;
+import static com.acmetelecom.common.FakeCustomers.SECOND_CUSTOMER;
+import static com.acmetelecom.common.FakeCustomers.SECOND_CUSTOMER_NUMBER;
 
 import java.util.List;
 
