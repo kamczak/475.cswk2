@@ -24,7 +24,7 @@ public class PrintingBillGenerator implements BillGenerator {
 
         for (BillLineItem call : calls) {
             printer.printItem(call.getStartDateTime(), call.getCallee(), 
-            		DateStringUtils.durationToFormattedString(call.getDuration()),
+            		DateStringUtils.durationToBillFormattedString(call.getDuration()),
                     MoneyFormatter.penceToPounds(call.getCost()));
         }
 

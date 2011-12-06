@@ -4,6 +4,9 @@ import org.joda.time.DateTime;
 
 import com.acmetelecom.time.DateStringUtils;
 
+/**
+ * Outputs bill in HTML format to the console
+ */
 public class HtmlPrinter implements Printer {
 
     public void printHeading(String name, String phoneNumber, String pricePlan) {
