@@ -13,7 +13,7 @@ import com.acmetelecom.peak.DailyPeakPeriod;
 import com.acmetelecom.peak.PeakPeriod;
 import com.acmetelecom.printer.FakePrinter;
 import com.acmetelecom.strategy.PercentagePeakCharging;
-import com.acmetelecom.strategy.AggresivePeakCharging;
+import com.acmetelecom.strategy.AggressivePeakCharging;
 import com.acmetelecom.strategy.ChargingStrategy;
 
 public class BillingSystemUnderTest {
@@ -24,7 +24,7 @@ public class BillingSystemUnderTest {
 	public static final FakeClock clock = new FakeClock();
 	public static CallLog callLog;
 	public static PeakPeriod peakPeriod = new DailyPeakPeriod(new LocalTime(7, 0), new LocalTime(19, 0));
-	public static final ChargingStrategy oldStrategy = new AggresivePeakCharging(peakPeriod);
+	public static final ChargingStrategy oldStrategy = new AggressivePeakCharging(peakPeriod);
 	public static final ChargingStrategy newStrategy = new PercentagePeakCharging(peakPeriod);
 	public static ChargingStrategy currentStrategy;
 	public static BillingSystem billingSystem;

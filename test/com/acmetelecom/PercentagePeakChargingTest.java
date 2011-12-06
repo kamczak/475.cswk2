@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.acmetelecom.strategy.PercentagePeakCharging;
 
-public class NewStrategyTest extends StrategyTestScenarios {
+public class PercentagePeakChargingTest extends ChargingStrategyTestScenarios {
 
     @Before
     public void initialiseStrategy() {
@@ -26,12 +26,12 @@ public class NewStrategyTest extends StrategyTestScenarios {
 
     @Test
     public void calculatesOverlappingLeftPeakCallCorrectly() {
-        calculatesOverlappingLeftPeakCallCorrectly(new BigDecimal(2520));
+        calculatesOverlappingLeftPeakCallCorrectly(new BigDecimal(2652));
     }
 
     @Test
     public void calculatesOverlappingRightPeakCallCorrectly() {
-        calculatesOverlappingRightPeakCallCorrectly(new BigDecimal(2520));
+        calculatesOverlappingRightPeakCallCorrectly(new BigDecimal(2322));
     }
 
     @Test
@@ -42,5 +42,15 @@ public class NewStrategyTest extends StrategyTestScenarios {
     @Test
     public void calculatesOverlappingTwoPeaksCallCorrectly() {
         calculatesOverlappingTwoPeaksCallCorrectly(new BigDecimal(15840));
+    }
+    
+    @Test
+    public void calculatesOffPeakDuringForwardTimeChange() {
+        calculatesOffPeakDuringForwardTimeChange(new BigDecimal(240));
+    }
+    
+    @Test
+    public void calculatesOffPeakDuringBackwardTimeChange() {
+        calculatesOffPeakDuringBackwardTimeChange(new BigDecimal(240));
     }
 }

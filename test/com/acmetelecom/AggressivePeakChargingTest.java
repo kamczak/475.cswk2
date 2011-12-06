@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.acmetelecom.strategy.AggresivePeakCharging;
+import com.acmetelecom.strategy.AggressivePeakCharging;
 
-public class OldStrategyTest extends StrategyTestScenarios {
+public class AggressivePeakChargingTest extends ChargingStrategyTestScenarios {
 
     @Before
     public void initialiseStrategy() {
-        mStrategy = new AggresivePeakCharging(peakPeriod);
+        mStrategy = new AggressivePeakCharging(peakPeriod);
     }
 
     @Test
@@ -42,5 +42,15 @@ public class OldStrategyTest extends StrategyTestScenarios {
     @Test
     public void calculatesOverlappingTwoPeaksCallCorrectly() {
         calculatesOverlappingTwoPeaksCallCorrectly(new BigDecimal(28800));
+    }
+    
+    @Test
+    public void calculatesOffPeakDuringForwardTimeChange() {
+        calculatesOffPeakDuringForwardTimeChange(new BigDecimal(240));
+    }
+    
+    @Test
+    public void calculatesOffPeakDuringBackwardTimeChange() {
+        calculatesOffPeakDuringBackwardTimeChange(new BigDecimal(240));
     }
 }
