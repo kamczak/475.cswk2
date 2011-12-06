@@ -6,6 +6,9 @@ import com.acmetelecom.printer.Printer;
 import com.acmetelecom.time.DateStringUtils;
 import com.google.inject.Inject;
 
+/**
+ * Generates the bill using the supplied Printer
+ */
 public class PrintingBillGenerator implements BillGenerator {
     private Printer printer;
 
@@ -14,14 +17,15 @@ public class PrintingBillGenerator implements BillGenerator {
         this.printer = printer;
     }
 
+    @Override
     public void generateBill(Customer customer, List<BillLineItem> calls, String totalBill) {
         printer.printHeading(customer.getFullName(), customer.getPhoneNumber(),
                 customer.getPricePlan());
 
         for (BillLineItem call : calls) {
-            printer.printItem(call.getDate(), call.getCallee(), 
+            printer.printItem(call.getStartDateTime(), call.getCallee(), 
             		DateStringUtils.durationToFormattedString(call.getDuration()),
-                    MoneyFormatter.penceToPounds(call.cost()));
+                    MoneyFormatter.penceToPounds(call.getCost()));
         }
 
         printer.printTotal(totalBill);

@@ -7,6 +7,9 @@ import org.joda.time.Duration;
 
 import com.acmetelecom.call.Call;
 
+/**
+ * A thin wrapper around call that also contains its cost
+ */
 class BillLineItem {
 	private Call call;
 	private BigDecimal callCost;
@@ -16,7 +19,7 @@ class BillLineItem {
 		this.callCost = callCost;
 	}
 
-	public DateTime getDate() {
+	public DateTime getStartDateTime() {
 		return call.getStartDateTime();
 	}
 
@@ -28,7 +31,7 @@ class BillLineItem {
 	    return call.getDuration();
 	}
 
-	public BigDecimal cost() {
+	public BigDecimal getCost() {
 		return callCost;
 	}
 }
