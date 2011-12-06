@@ -28,7 +28,7 @@ public class CustomerCallLog implements CallLog {
 	}
 	
 	@Override
-	public void callInitiated(String caller, String callee) {
+	public void callInitiated(String caller, String callee) throws UnexpectedCallException{
 		CallEvent currentCall = initiatedCalls.get(caller);
 		if (currentCall != null) {
 			throw new UnexpectedCallException("Call initiated twice for same number.");
@@ -38,9 +38,10 @@ public class CustomerCallLog implements CallLog {
 	}
 
 	@Override
-	public void callCompleted(String caller, String callee) {
+	public void callCompleted(String caller, String callee) throws UnexpectedCallException {
 		CallEvent begin = initiatedCalls.get(caller);
 		if (begin == null) {
+			//In the previous version we skipped endings for all uniti
 		    return;
 		}
 

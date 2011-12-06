@@ -90,7 +90,7 @@ public class BillingSystemTest {
     	context.checking(new Expectations() {{
              oneOf(callLog).getCalls(FIRST_CUSTOMER);
            //Added to make it run to the end of the test without exception - test for it later
-             allowing(billGenerator).send(with(any(Customer.class)), 
+             allowing(billGenerator).generateBill(with(any(Customer.class)), 
             		 with(any(List.class)), 
             		 with(any(String.class)));
     	}});
@@ -107,7 +107,7 @@ public class BillingSystemTest {
     	fakeCustomers.add(FIRST_CUSTOMER);
     	context.checking(new Expectations() {{
              oneOf(callLog).getCalls(FIRST_CUSTOMER);
-             oneOf(billGenerator).send(with(any(Customer.class)), 
+             oneOf(billGenerator).generateBill(with(any(Customer.class)), 
             		 with(any(List.class)), 
             		 with(any(String.class)));
     	}});
@@ -128,7 +128,7 @@ public class BillingSystemTest {
     	context.checking(new Expectations() {{
              oneOf(callLog).getCalls(FIRST_CUSTOMER);
              will(returnValue(fakeCalls));
-             allowing(billGenerator).send(with(any(Customer.class)), 
+             allowing(billGenerator).generateBill(with(any(Customer.class)), 
             		 with(any(List.class)), 
             		 with(any(String.class)));
              oneOf(tariffLibrary).tarriffFor(FIRST_CUSTOMER);

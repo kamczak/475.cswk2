@@ -6,6 +6,6 @@ import com.acmetelecom.customer.Customer;
 
 public interface BillGenerator {
 
-    public void send(Customer customer, List<BillLineItem> calls, String totalBill);
+    public void generateBill(Customer customer, List<BillLineItem> calls, String totalBill);
 
 }

@@ -1,7 +1,6 @@
 package com.acmetelecom.bill;
 
 import java.util.List;
-
 import com.acmetelecom.customer.Customer;
 import com.acmetelecom.printer.Printer;
 import com.google.inject.Inject;
@@ -14,7 +13,7 @@ public class PrintingBillGenerator implements BillGenerator {
         this.printer = printer;
     }
 
-    public void send(Customer customer, List<BillLineItem> calls, String totalBill) {
+    public void generateBill(Customer customer, List<BillLineItem> calls, String totalBill) {
         printer.printHeading(customer.getFullName(), customer.getPhoneNumber(),
                 customer.getPricePlan());
 

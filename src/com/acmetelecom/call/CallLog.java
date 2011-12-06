@@ -10,13 +10,13 @@ public interface CallLog {
 	 * Event to notify that the call has been initiated between
 	 * the caller to the callee
 	 */
-	public void callInitiated(String caller, String callee);
+	public void callInitiated(String caller, String callee) throws UnexpectedCallException;
 
 	/** 
 	 * Event to notify that the call has been completed between
 	 * the caller to the callee
 	 */
-	public void callCompleted(String caller, String callee);
+	public void callCompleted(String caller, String callee) throws UnexpectedCallException;
 	
 	/**
 	 * Returns list of calls given a customer
