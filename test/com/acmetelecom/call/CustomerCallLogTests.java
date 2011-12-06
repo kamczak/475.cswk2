@@ -24,6 +24,7 @@ import com.acmetelecom.time.Clock;
 
 public class CustomerCallLogTests {
     private static final DateTime SAT_NOV_26_1700 = new DateTime("2011-11-26T17:00:00");
+
 	@Rule
 	public final JUnitRuleMockery m = new JUnitRuleMockery();
 
@@ -31,39 +32,29 @@ public class CustomerCallLogTests {
 	private CustomerCallLog log = new CustomerCallLog(clock);
 
 	@Test
-	public void CallInitiatedCallsOnSystemClock() {
-		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
+	public void callInitiatedCallsOnSystemClock() {
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700 });
 		
-		// Act
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
-		
-		// Assert
-		m.assertIsSatisfied();
 	}
 
 	@Test
-	public void CallEndedCallsOnSystemClock() {
-		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
+	public void callEndedCallsOnSystemClock() {
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
+
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
-		
-		// Act
 		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
-		
-		// Assert
-		m.assertIsSatisfied();
 	}
 
 	@Test
-	public void TwoCallsInitiatedForSameCustomerThrowsException() {
+	public void twoCallsInitiatedForSameCustomerThrowsException() {
 		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
-
-		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700 });
 		UnexpectedCallException exception = null;
-		
+
 		// Act
+		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
+		
 		try {
 			log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		} catch (UnexpectedCallException e) {
@@ -77,7 +68,7 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void EndedCallWithouthCallInitializedIsIgnored() {
+	public void endedCallWithouthCallInitializedIsIgnored() {
 		// Arrange
 		log = new CustomerCallLog(clock);
 
@@ -89,22 +80,23 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void EndedCallEventForDifferentCallThanInitiatedIsIgnored() {
+	public void endedCallEventForDifferentCallThanInitiatedIsIgnored() {
 		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700});
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700});
 		log = new CustomerCallLog(clock);
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
 		log.callCompleted(SECOND_CUSTOMER_NUMBER, OTHER_CUSTOMER_NUMBER);
+
 		//Assert
 		Assert.assertTrue(log.getCalls(FIRST_CUSTOMER).isEmpty());
 	}
 
 	@Test
-	public void EmptyLogForJustInitiatedCalls() {
+	public void emptyLogForJustInitiatedCalls() {
 		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700 });
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700 });
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
 		// Act
@@ -115,9 +107,9 @@ public class CustomerCallLogTests {
 	}
 
 	@Test
-	public void LogReturnedForFinishedCall() {
+	public void logReturnedForFinishedCall() {
 		// Arrange
-		setUpClock(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
+		expectClockCallsAndReturnFollowing(new DateTime[] { SAT_NOV_26_1700, SAT_NOV_26_1700});
 		log.callInitiated(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		log.callCompleted(FIRST_CUSTOMER_NUMBER, SECOND_CUSTOMER_NUMBER);
 		
@@ -129,7 +121,7 @@ public class CustomerCallLogTests {
 	}
 	
 	@Test
-	public void LogReturnsCallsJustForAGivenCustomer() {
+	public void logReturnsCallsJustForAGivenCustomer() {
 		// Arrange
 		m.checking(new Expectations() {{
 		    allowing(clock).getCurrentDateTime();
@@ -148,7 +140,7 @@ public class CustomerCallLogTests {
 		Assert.assertEquals(OTHER_CUSTOMER_NUMBER, c.getCallee());
 	}
 
-	private void setUpClock(DateTime[] values) {
+	private void expectClockCallsAndReturnFollowing(DateTime[] values) {
 		final int n = values.length;
 		final Action[] returnValues = new Action[n];
 
@@ -156,7 +148,7 @@ public class CustomerCallLogTests {
 			returnValues[i] = Expectations.returnValue(values[i]);
 
 		m.checking(new Expectations() {{
-		    exactly(n).of(clock).getCurrentDateTime();
+		    exactly(n).of (clock).getCurrentDateTime();
 		            will(onConsecutiveCalls(returnValues));
 		}});
 	}
