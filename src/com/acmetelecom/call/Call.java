@@ -13,10 +13,10 @@ public class Call {
 	public Call(CallEvent start, CallEvent end) {
 		this.start = start;
 		this.end = end;
-		callInterval = new Interval(start.dateTime(), end.dateTime());
+		callInterval = new Interval(start.getDateTime(), end.getDateTime());
 	}
 
-	public String callee() {
+	public String getCallee() {
 		return start.getCallee();
 	}
 	
@@ -24,11 +24,11 @@ public class Call {
 	    return callInterval.toDuration();
 	}
 	
-	public DateTime startDateTime() {
-		return start.dateTime();
+	public DateTime getStartDateTime() {
+		return start.getDateTime();
 	}
 
-	public DateTime endTime() {
-		return end.dateTime();
+	public DateTime getEndDateTime() {
+		return end.getDateTime();
 	}
 }

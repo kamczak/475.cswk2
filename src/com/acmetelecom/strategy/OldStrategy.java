@@ -20,7 +20,7 @@ public class OldStrategy implements Strategy {
 
 	@Override
 	public BigDecimal getCost(Tariff tariff, Call call) {
-		Interval callInterval = new Interval(call.startDateTime(), call.endTime());
+		Interval callInterval = new Interval(call.getStartDateTime(), call.getEndDateTime());
 		
 		BigDecimal multiplyRate = tariff.offPeakRate();;
 		for (Interval peakInterval : peakPeriod.getRelevantPeakIntervals(callInterval)) {

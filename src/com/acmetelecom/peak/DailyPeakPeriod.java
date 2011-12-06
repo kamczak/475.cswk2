@@ -16,7 +16,7 @@ public class DailyPeakPeriod implements PeakPeriod {
 
     public DailyPeakPeriod(LocalTime start, LocalTime end) {
         if (end.isBefore(start)) {
-            throw new IllegalArgumentException("end cannot come before start!");
+            throw new IllegalArgumentException("End cannot come before start!");
         }
 
         this.end = end;

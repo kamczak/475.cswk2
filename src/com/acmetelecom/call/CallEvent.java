@@ -21,7 +21,7 @@ public class CallEvent {
         return callee;
     }
 
-    public DateTime dateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 }

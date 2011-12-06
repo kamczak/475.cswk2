@@ -57,7 +57,7 @@ public abstract class StrategyTestScenarios {
                         OTHER_CUSTOMER_NUMBER,
                         end));
         
-        final Interval callInterval = new Interval(call.startDateTime(), call.endTime());
+        final Interval callInterval = new Interval(call.getStartDateTime(), call.getEndDateTime());
         
         context.checking(new Expectations() {{
             oneOf (peakPeriod).getRelevantPeakIntervals(callInterval);

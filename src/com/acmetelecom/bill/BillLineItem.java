@@ -16,11 +16,11 @@ class BillLineItem {
 	}
 
 	public DateTime date() {
-		return call.startDateTime();
+		return call.getStartDateTime();
 	}
 
 	public String callee() {
-		return call.callee();
+		return call.getCallee();
 	}
 
 	public String durationMinutes() {

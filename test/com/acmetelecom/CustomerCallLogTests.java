@@ -146,7 +146,7 @@ public class CustomerCallLogTests {
 		// Assert
 		Assert.assertEquals(1, calls.size());
 		Call c = calls.get(0);
-		Assert.assertEquals(OTHER_CUSTOMER_NUMBER, c.callee());
+		Assert.assertEquals(OTHER_CUSTOMER_NUMBER, c.getCallee());
 	}
 
 	private void setUpClock(DateTime[] values) {
