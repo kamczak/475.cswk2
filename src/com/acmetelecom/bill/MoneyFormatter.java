@@ -3,7 +3,7 @@ package com.acmetelecom.bill;
 import java.math.BigDecimal;
 
 /**
- * Small utility converting pounds to pence in a fixed format
+ * Small utility converting pence to pounds in a fixed format
  */
 class MoneyFormatter {
     public static String penceToPounds(BigDecimal pence) {

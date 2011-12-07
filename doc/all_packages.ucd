@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="(default package)_6" size="1206,809" id="" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D31303030203437352E6373776B322F4B616D696C">
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.bill" location="505,438" size="193,325" id="com.acmetelecom.bill">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@children.4/@sourceConnections.0 //@children.0/@children.1/@sourceConnections.0" name="BillGenerator" location="39,124" size="127,43" id="com.acmetelecom.bill/BillGenerator" runTimeClassModel="generateBill(Lcom.acmetelecom.customer.Customer;Ljava.util.List;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="BillingSystem" location="24,36" size="129,51" id="com.acmetelecom.bill/BillingSystem" runTimeClassModel="createCustomerBills(Ljava.util.List;),BillingSystem(Lcom.acmetelecom.customer.CustomerDatabase;Lcom.acmetelecom.customer.TariffLibrary;Lcom.acmetelecom.call.CallLog;Lcom.acmetelecom.strategy.ChargingStrategy;Lcom.acmetelecom.bill.BillGenerator;),callInitiated(Ljava.lang.String;Ljava.lang.String;),callCompleted(Ljava.lang.String;Ljava.lang.String;),createCustomerBills()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="com.acmetelecom.bill/BillGenerator@billGenerator+com.acmetelecom.bill/BillingSystem@" source="//@children.0/@children.1" target="//@children.0/@children.0" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.2" label="//@children.0/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="71,51" id="com.acmetelecom.bill/BillGenerator@billGenerator+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillingSystem#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="billGenerator" location="56,0" id="com.acmetelecom.bill/BillGenerator@billGenerator+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillGenerator#billGenerator" multiplicityLabel="//@children.0/@children.1/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.0/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - billGenerator" location="607,541" size="71,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="587,541" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.customer/TariffLibrary@tariffLibrary+com.acmetelecom.bill/BillingSystem@" source="//@children.0/@children.1" target="//@children.6/@children.4" targetEnd="//@children.0/@children.1/@sourceConnections.1/@children.2" label="//@children.0/@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,39" id="com.acmetelecom.customer/TariffLibrary@tariffLibrary+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillingSystem#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="tariffLibrary" location="119,17" id="com.acmetelecom.customer/TariffLibrary@tariffLibrary+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.customer/TariffLibrary#tariffLibrary" multiplicityLabel="//@children.0/@children.1/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - tariffLibrary" location="438,492" size="67,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="438,520" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.strategy/ChargingStrategy@strategy+com.acmetelecom.bill/BillingSystem@" source="//@children.0/@children.1" target="//@children.4/@children.1" targetEnd="//@children.0/@children.1/@sourceConnections.2/@children.2" label="//@children.0/@children.1/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="63,0" id="com.acmetelecom.strategy/ChargingStrategy@strategy+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillingSystem#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="strategy" location="154,43" id="com.acmetelecom.strategy/ChargingStrategy@strategy+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.strategy/ChargingStrategy#strategy" multiplicityLabel="//@children.0/@children.1/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.2/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - strategy" location="604,386" size="50,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="584,386" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/CallLog@callLog+com.acmetelecom.bill/BillingSystem@" source="//@children.0/@children.1" target="//@children.1/@children.3" targetEnd="//@children.0/@children.1/@sourceConnections.3/@children.2" label="//@children.0/@children.1/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,4" id="com.acmetelecom.call/CallLog@callLog+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillingSystem#" attachSource="true" roleLabel="//@children.0/@children.1/@sourceConnections.3/@children.1/@children.0">
+          <children xsi:type="editmodel:LabelEditModel" location="665,457" size="0,14" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="callLog" location="0,10" id="com.acmetelecom.call/CallLog@callLog+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.call/CallLog#callLog" multiplicityLabel="//@children.0/@children.1/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.3/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - callLog" location="908,402" size="44,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="946,430" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.customer/CustomerDatabase@customerDatabase+com.acmetelecom.bill/BillingSystem@" source="//@children.0/@children.1" target="//@children.6/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.4/@children.2" label="//@children.0/@children.1/@sourceConnections.4/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.4/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,10" id="com.acmetelecom.customer/CustomerDatabase@customerDatabase+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.bill/BillingSystem#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="customerDatabase" location="161,11" id="com.acmetelecom.customer/CustomerDatabase@customerDatabase+com.acmetelecom.bill/BillingSystem@|com.acmetelecom.customer/CustomerDatabase#customerDatabase" multiplicityLabel="//@children.0/@children.1/@sourceConnections.4/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.4/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - customerDatabase" location="226,463" size="101,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="226,491" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="BillLineItem" location="34,286" size="119,29" id="com.acmetelecom.bill/BillLineItem" runTimeClassModel="BillLineItem(Lcom.acmetelecom.call.Call;Ljava.math.BigDecimal;),getDate(),cost(),getCallee(),getDuration()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/Call@call+com.acmetelecom.bill/BillLineItem@" source="//@children.0/@children.2" target="//@children.1/@children.0" targetEnd="//@children.0/@children.2/@sourceConnections.0/@children.2" label="//@children.0/@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="119,18" id="com.acmetelecom.call/Call@call+com.acmetelecom.bill/BillLineItem@|com.acmetelecom.bill/BillLineItem#" attachSource="true" roleLabel="//@children.0/@children.2/@sourceConnections.0/@children.1/@children.0">
+          <children xsi:type="editmodel:LabelEditModel" location="665,721" size="0,14" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="call" location="0,19" id="com.acmetelecom.call/Call@call+com.acmetelecom.bill/BillLineItem@|com.acmetelecom.call/Call#call" multiplicityLabel="//@children.0/@children.2/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@children.2/@sourceConnections.0/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - call" location="922,721" size="26,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="942,749" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="MoneyFormatter" location="17,247" size="146,29" id="com.acmetelecom.bill/MoneyFormatter" runTimeClassModel="penceToPounds(Ljava.math.BigDecimal;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="PrintingBillGenerator" location="10,211" size="177,29" id="com.acmetelecom.bill/PrintingBillGenerator" runTimeClassModel="generateBill(Lcom.acmetelecom.customer.Customer;Ljava.util.List;Ljava.lang.String;),PrintingBillGenerator(Lcom.acmetelecom.printer.Printer;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.bill/BillGenerator&lt;-com.acmetelecom.bill/PrintingBillGenerator" source="//@children.0/@children.4" target="//@children.0/@children.0" targetEnd="//@children.0/@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="92,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="63,43"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.printer/Printer@printer+com.acmetelecom.bill/PrintingBillGenerator@" source="//@children.0/@children.4" target="//@children.3/@children.1" targetEnd="//@children.0/@children.4/@sourceConnections.1/@children.2" label="//@children.0/@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="177,19" id="com.acmetelecom.printer/Printer@printer+com.acmetelecom.bill/PrintingBillGenerator@|com.acmetelecom.bill/PrintingBillGenerator#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="printer" location="0,19" id="com.acmetelecom.printer/Printer@printer+com.acmetelecom.bill/PrintingBillGenerator@|com.acmetelecom.printer/Printer#printer" multiplicityLabel="//@children.0/@children.4/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.0/@children.4/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - printer" location="704,589" size="41,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="739,617" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.call" location="930,375" size="273,393" id="com.acmetelecom.call">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.2" name="Call" location="25,348" size="216,29" id="com.acmetelecom.call/Call" runTimeClassModel="Call(Lcom.acmetelecom.call.CallEvent;Lcom.acmetelecom.call.CallEvent;),getCallee(),getStartDateTime(),getEndDateTime(),getDuration()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/CallEvent@end+com.acmetelecom.call/Call@" source="//@children.1/@children.0" target="//@children.1/@children.1" targetEnd="//@children.1/@children.0/@sourceConnections.0/@children.2" label="//@children.1/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="130,-2" id="com.acmetelecom.call/CallEvent@end+com.acmetelecom.call/Call@|com.acmetelecom.call/Call#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="end" location="88,28" id="com.acmetelecom.call/CallEvent@end+com.acmetelecom.call/Call@|com.acmetelecom.call/CallEvent#end" multiplicityLabel="//@children.1/@children.0/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.1/@children.0/@sourceConnections.0/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - end" location="1092,634" size="28,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="1072,634" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/CallEvent@start+com.acmetelecom.call/Call@" source="//@children.1/@children.0" target="//@children.1/@children.1" targetEnd="//@children.1/@children.0/@sourceConnections.1/@children.2" label="//@children.1/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="50,0" id="com.acmetelecom.call/CallEvent@start+com.acmetelecom.call/Call@|com.acmetelecom.call/Call#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="start" location="8,29" id="com.acmetelecom.call/CallEvent@start+com.acmetelecom.call/Call@|com.acmetelecom.call/CallEvent#start" multiplicityLabel="//@children.1/@children.0/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.1/@children.0/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - start" location="1012,634" size="32,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="992,634" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.0/@sourceConnections.1 //@children.1/@children.0/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.3" name="CallEvent" location="67,223" size="102,29" id="com.acmetelecom.call/CallEvent" runTimeClassModel="caller,dateTime,CallEvent(Ljava.lang.String;Ljava.lang.String;Lorg.joda.time.DateTime;),callee">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="CustomerCallLog" location="54,125" size="192,29" id="com.acmetelecom.call/CustomerCallLog" runTimeClassModel="CustomerCallLog(Lcom.acmetelecom.time.Clock;),callInitiated(Ljava.lang.String;Ljava.lang.String;),callCompleted(Ljava.lang.String;Ljava.lang.String;),getCalls(Lcom.acmetelecom.customer.Customer;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.call/CallLog&lt;-com.acmetelecom.call/CustomerCallLog" source="//@children.1/@children.2" target="//@children.1/@children.3" targetEnd="//@children.1/@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="32,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="57,43"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="com.acmetelecom.time/Clock@clock+com.acmetelecom.call/CustomerCallLog@" source="//@children.1/@children.2" target="//@children.5/@children.0" targetEnd="//@children.1/@children.2/@sourceConnections.1/@children.2" label="//@children.1/@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="151,0" id="com.acmetelecom.time/Clock@clock+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.call/CustomerCallLog#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="clock" location="38,43" id="com.acmetelecom.time/Clock@clock+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.time/Clock#clock" multiplicityLabel="//@children.1/@children.2/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.1/@children.2/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - clock" location="1142,328" size="35,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="1122,328" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/Call@userCalls+com.acmetelecom.call/CustomerCallLog@" source="//@children.1/@children.2" target="//@children.1/@children.0" targetEnd="//@children.1/@children.2/@sourceConnections.2/@children.2" label="//@children.1/@children.2/@sourceConnections.2/@children.0" sourceEnd="//@children.1/@children.2/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="155,28" id="com.acmetelecom.call/Call@userCalls+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.call/CustomerCallLog#" attachSource="true">
+          <children xsi:type="editmodel:QualifierAttributeEditModel" name="key" location="1123,525" size="32,23" id=""/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="userCalls" location="184,0" id="com.acmetelecom.call/Call@userCalls+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.call/Call#userCalls" multiplicityLabel="//@children.1/@children.2/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.1/@children.2/@sourceConnections.2/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - userCalls" location="1146,702" size="55,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="1128,702" size="4,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.call/CallEvent@initiatedCalls+com.acmetelecom.call/CustomerCallLog@" source="//@children.1/@children.2" target="//@children.1/@children.1" targetEnd="//@children.1/@children.2/@sourceConnections.3/@children.2" label="//@children.1/@children.2/@sourceConnections.3/@children.0" sourceEnd="//@children.1/@children.2/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="42,28" id="com.acmetelecom.call/CallEvent@initiatedCalls+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.call/CustomerCallLog#" attachSource="true" roleLabel="//@children.1/@children.2/@sourceConnections.3/@children.1/@children.1">
+          <children xsi:type="editmodel:QualifierAttributeEditModel" name="key" location="1010,525" size="32,23" id=""/>
+          <children xsi:type="editmodel:LabelEditModel" location="1019,555" size="0,14" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="initiatedCalls" location="29,0" id="com.acmetelecom.call/CallEvent@initiatedCalls+com.acmetelecom.call/CustomerCallLog@|com.acmetelecom.call/CallEvent#initiatedCalls" multiplicityLabel="//@children.1/@children.2/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.1/@children.2/@sourceConnections.3/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - initiatedCalls" location="1033,577" size="69,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="1015,577" size="4,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.2/@sourceConnections.0 //@children.0/@children.1/@sourceConnections.3" name="CallLog" location="29,38" size="91,43" id="com.acmetelecom.call/CallLog" runTimeClassModel="callInitiated(Ljava.lang.String;Ljava.lang.String;),callCompleted(Ljava.lang.String;Ljava.lang.String;),getCalls(Lcom.acmetelecom.customer.Customer;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.peak" location="504,30" size="205,181" id="com.acmetelecom.peak">
+    <children xsi:type="editmodel:ClassEditModel" name="DailyPeakPeriod" location="26,31" size="148,29" id="com.acmetelecom.peak/DailyPeakPeriod" runTimeClassModel="getRelevantPeakIntervals(Lorg.joda.time.Interval;),DailyPeakPeriod(Lorg.joda.time.LocalTime;Lorg.joda.time.LocalTime;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="com.acmetelecom.peak/PeakPeriod&lt;-com.acmetelecom.peak/DailyPeakPeriod" source="//@children.2/@children.0" target="//@children.2/@children.1" targetEnd="//@children.2/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="77,29" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="71,0"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.2/@children.0/@sourceConnections.0 //@children.4/@children.2/@sourceConnections.1 //@children.4/@children.0/@sourceConnections.1" name="PeakPeriod" location="30,107" size="142,43" id="com.acmetelecom.peak/PeakPeriod" runTimeClassModel="getRelevantPeakIntervals(Lorg.joda.time.Interval;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.printer" location="729,555" size="197,166" id="com.acmetelecom.printer">
+    <children xsi:type="editmodel:ClassEditModel" name="HtmlPrinter" location="22,127" size="114,29" id="com.acmetelecom.printer/HtmlPrinter" runTimeClassModel="printTotal(Ljava.lang.String;),printHeading(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),printItem(Lorg.joda.time.DateTime;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.printer/Printer&lt;-com.acmetelecom.printer/HtmlPrinter" source="//@children.3/@children.0" target="//@children.3/@children.1" targetEnd="//@children.3/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="43,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="42,43"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.3/@children.0/@sourceConnections.0 //@children.0/@children.4/@sourceConnections.1" name="Printer" location="23,36" size="85,43" id="com.acmetelecom.printer/Printer" runTimeClassModel="printTotal(Ljava.lang.String;),printHeading(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),printItem(Lorg.joda.time.DateTime;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.strategy" location="360,225" size="436,196" id="com.acmetelecom.strategy">
+    <children xsi:type="editmodel:ClassEditModel" name="AggresivePeakCharging" location="226,38" size="195,29" id="com.acmetelecom.strategy/AggresivePeakCharging" runTimeClassModel="getCost(Lcom.acmetelecom.customer.Tariff;Lcom.acmetelecom.call.Call;),AggresivePeakCharging(Lcom.acmetelecom.peak.PeakPeriod;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.strategy/ChargingStrategy&lt;-com.acmetelecom.strategy/AggresivePeakCharging" source="//@children.4/@children.0" target="//@children.4/@children.1" targetEnd="//@children.4/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="59,29" anchorKind="FixedAtEdge" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="202,0" anchorKind="FixedAtEdge"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/AggresivePeakCharging@" source="//@children.4/@children.0" target="//@children.2/@children.1" targetEnd="//@children.4/@children.0/@sourceConnections.1/@children.2" label="//@children.4/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="78,0" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/AggresivePeakCharging@|com.acmetelecom.strategy/AggresivePeakCharging#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="peakPeriod" location="130,43" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/AggresivePeakCharging@|com.acmetelecom.peak/PeakPeriod#peakPeriod" multiplicityLabel="//@children.4/@children.0/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.4/@children.0/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - peakPeriod" location="671,187" size="63,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="651,187" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.4/@children.2/@sourceConnections.0 //@children.4/@children.0/@sourceConnections.0 //@children.0/@children.1/@sourceConnections.2" name="ChargingStrategy" location="83,111" size="262,43" id="com.acmetelecom.strategy/ChargingStrategy" runTimeClassModel="getCost(Lcom.acmetelecom.customer.Tariff;Lcom.acmetelecom.call.Call;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="PercentagePeakCharging" location="15,38" size="205,29" id="com.acmetelecom.strategy/PercentagePeakCharging" runTimeClassModel="getCost(Lcom.acmetelecom.customer.Tariff;Lcom.acmetelecom.call.Call;),PercentagePeakCharging(Lcom.acmetelecom.peak.PeakPeriod;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.strategy/ChargingStrategy&lt;-com.acmetelecom.strategy/PercentagePeakCharging" source="//@children.4/@children.2" target="//@children.4/@children.1" targetEnd="//@children.4/@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="136,29" anchorKind="FixedAtEdge" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="68,0" anchorKind="FixedAtEdge"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/PercentagePeakCharging@" source="//@children.4/@children.2" target="//@children.2/@children.1" targetEnd="//@children.4/@children.2/@sourceConnections.1/@children.2" label="//@children.4/@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="192,0" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/PercentagePeakCharging@|com.acmetelecom.strategy/PercentagePeakCharging#" attachSource="true" roleLabel="//@children.4/@children.2/@sourceConnections.1/@children.1/@children.0">
+          <children xsi:type="editmodel:LabelEditModel" location="560,242" size="0,14" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="peakPeriod" location="33,43" id="com.acmetelecom.peak/PeakPeriod@peakPeriod+com.acmetelecom.strategy/PercentagePeakCharging@|com.acmetelecom.peak/PeakPeriod#peakPeriod" multiplicityLabel="//@children.4/@children.2/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.4/@children.2/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - peakPeriod" location="574,187" size="63,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="554,187" size="6,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.time" location="1027,165" size="176,181" id="com.acmetelecom.time">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.5/@children.1/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.1" name="Clock" location="70,113" size="78,43" id="com.acmetelecom.time/Clock" runTimeClassModel="getCurrentDateTime()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="SystemClock" location="34,33" size="123,29" id="com.acmetelecom.time/SystemClock" runTimeClassModel="getCurrentDateTime()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.time/Clock&lt;-com.acmetelecom.time/SystemClock" source="//@children.5/@children.1" target="//@children.5/@children.0" targetEnd="//@children.5/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="74,29" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="38,0"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="com.acmetelecom.customer" location="10,430" size="481,316" id="com.acmetelecom.customer">
+    <children xsi:type="editmodel:ClassEditModel" name="CentralTariffDatabase" location="287,194" size="179,29" id="com.acmetelecom.customer/CentralTariffDatabase" runTimeClassModel="tarriffFor(Lcom.acmetelecom.customer.Customer;),getInstance()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.customer/TariffLibrary&lt;-com.acmetelecom.customer/CentralTariffDatabase" source="//@children.6/@children.0" target="//@children.6/@children.4" targetEnd="//@children.6/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="74,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="59,43"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@children.5/@sourceConnections.1" name="Customer" location="52,206" size="102,29" id="com.acmetelecom.customer/Customer" runTimeClassModel="getFullName(),pricePlan,getPhoneNumber(),phoneNumber,fullName,getPricePlan(),Customer(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.4 //@children.6/@children.5/@sourceConnections.0" name="CustomerDatabase" location="48,43" size="161,43" id="com.acmetelecom.customer/CustomerDatabase" runTimeClassModel="getCustomers()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:EnumerationEditModel" name="Tariff" location="175,196" size="94,107" id="com.acmetelecom.customer/Tariff" runTimeClassModel="Leisure%,Standard%,Business%">
+      <children xsi:type="editmodel:CompartmentEditModel" size="64,54">
+        <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Business" id="com.acmetelecom.customer/Tariff#Business%"/>
+        <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Leisure" id="com.acmetelecom.customer/Tariff#Leisure%"/>
+        <children xsi:type="editmodel:EnumerationLiteralEditModel" name="Standard" id="com.acmetelecom.customer/Tariff#Standard%"/>
+      </children>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.6/@children.0/@sourceConnections.0 //@children.0/@children.1/@sourceConnections.1" name="TariffLibrary" location="302,66" size="119,43" id="com.acmetelecom.customer/TariffLibrary" runTimeClassModel="tarriffFor(Lcom.acmetelecom.customer.Customer;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="CentralCustomerDatabase" location="32,142" size="207,29" id="com.acmetelecom.customer/CentralCustomerDatabase" runTimeClassModel="">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="com.acmetelecom.customer/CustomerDatabase&lt;-com.acmetelecom.customer/CentralCustomerDatabase" source="//@children.6/@children.5" target="//@children.6/@children.2" targetEnd="//@children.6/@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="96,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="80,43"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="com.acmetelecom.customer/CentralCustomerDatabase@centralCustomerDatabase+com.acmetelecom.customer/Customer@customer" source="//@children.6/@children.5" target="//@children.6/@children.1" targetEnd="//@children.6/@children.5/@sourceConnections.1/@children.2" label="//@children.6/@children.5/@sourceConnections.1/@children.0" sourceEnd="//@children.6/@children.5/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="centralCustomerDatabase" location="70,29" id="com.acmetelecom.customer/CentralCustomerDatabase@centralCustomerDatabase+com.acmetelecom.customer/Customer@customer|com.acmetelecom.customer/CentralCustomerDatabase#centralCustomerDatabase" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="customer" location="50,0" id="com.acmetelecom.customer/CentralCustomerDatabase@centralCustomerDatabase+com.acmetelecom.customer/Customer@customer|com.acmetelecom.customer/Customer#customer" multiplicityLabel="//@children.6/@children.5/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.6/@children.5/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - customer" location="119,615" size="55,14" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="101,615" size="4,14" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler>
+      <guides position="436"/>
+      <guides position="1167"/>
+    </topRuler>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

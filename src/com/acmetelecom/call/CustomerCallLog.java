@@ -11,16 +11,16 @@ import com.google.inject.Inject;
 
 public class CustomerCallLog implements CallLog {
 	
-	//Stores calls of each phone number
+	// Stores calls of each phone number
 	private Map<String, List<Call>> userCalls;
-	//Stores partial call began by each user
+	// Stores partial call began by each user
 	private Map<String, CallEvent> initiatedCalls;
-	//System clock
+	// System clock
 	private Clock clock;
 	
 	@Inject
 	public CustomerCallLog(Clock clock){
-		//We use concurrent hash map to make sure the system works in
+		// We use concurrent hash map to make sure the system works in
 		// distributed environment
 		userCalls = new ConcurrentHashMap<String, List<Call>>();
 		initiatedCalls = new ConcurrentHashMap<String, CallEvent>();
@@ -31,7 +31,7 @@ public class CustomerCallLog implements CallLog {
 	public void callInitiated(String caller, String callee) throws UnexpectedCallException{
 		CallEvent currentCall = initiatedCalls.get(caller);
 		if (currentCall != null) {
-			throw new UnexpectedCallException("Call initiated twice for same number.");
+			throw new UnexpectedCallException("Cannot initiate more than one call for same caller number");
 		}
 		// Store an event marking the initialisation of the phone call
 		initiatedCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentDateTime()));
@@ -41,12 +41,12 @@ public class CustomerCallLog implements CallLog {
 	public void callCompleted(String caller, String callee) throws UnexpectedCallException {
 		CallEvent begin = initiatedCalls.get(caller);
 		if (begin == null) {
-			//In the previous version we skipped endings for all uniti
+			// In the previous version we skipped endings for all uninitialised calls
 		    return;
 		}
 
 		if (!begin.getCallee().equals(callee)){
-			throw new UnexpectedCallException("Call completed event for different call than initialised.");
+			throw new UnexpectedCallException("Cannot complete call for different callee than initialised");
 		}
 		// Remove the beginning event stored
 		initiatedCalls.remove(caller);

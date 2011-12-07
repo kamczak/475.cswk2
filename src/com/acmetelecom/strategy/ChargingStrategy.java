@@ -6,7 +6,7 @@ import com.acmetelecom.call.Call;
 import com.acmetelecom.customer.Tariff;
 
 /**
- * Interfaces for classes that can calculate the cost of the call.
+ * Interface for classes that can calculate the cost of a call.
  */
 public interface ChargingStrategy {
 

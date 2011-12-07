@@ -14,6 +14,16 @@ public class HtmlPrinter implements Printer {
         System.out.println(h2(name + "/" + phoneNumber + " - " + "Price Plan: " + pricePlan));
         beginTable();
     }
+    
+    public void printItem(DateTime time, String callee, String duration, String cost) {
+    	System.out.println(tr(td(DateStringUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
+    }
+    
+    public void printTotal(String total) {
+    	endTable();
+    	System.out.println(h2("Total: " + total));
+    	endHtml();
+    }
 
     private void beginTable() {
         System.out.println("<table border=\"1\">");
@@ -28,10 +38,6 @@ public class HtmlPrinter implements Printer {
         return "<h2>" + text + "</h2>";
     }
 
-    public void printItem(DateTime time, String callee, String duration, String cost) {
-        System.out.println(tr(td(DateStringUtils.dateToBillingFormat(time)) + td(callee) + td(duration) + td(cost)));
-    }
-
     private String tr(String text) {
         return "<tr>" + text + "</tr>";
     }
@@ -42,12 +48,6 @@ public class HtmlPrinter implements Printer {
 
     private String td(String text) {
         return "<td>" + text + "</td>";
-    }
-
-    public void printTotal(String total) {
-        endTable();
-        System.out.println(h2("Total: " + total));
-        endHtml();
     }
 
     private void beginHtml() {
