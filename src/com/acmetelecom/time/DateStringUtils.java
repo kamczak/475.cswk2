@@ -20,12 +20,7 @@ public class DateStringUtils {
 
     public static DateTime parseStringToDateTime(String s) {
         DateTime dateTime = null;
-        try {
-            dateTime = FIT_FORMATTER.parseDateTime(s);
-        } catch (Exception e) {
-            e.printStackTrace();
-            assert false;
-        }
+        dateTime = FIT_FORMATTER.parseDateTime(s);
         return dateTime;
     }
 
