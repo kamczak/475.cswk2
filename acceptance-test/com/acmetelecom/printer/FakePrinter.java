@@ -7,6 +7,13 @@ import org.joda.time.DateTime;
 
 import com.acmetelecom.time.DateStringUtils;
 
+/**
+ * Allows for storing all the input in convenient lists, so that they can be returned later on.
+ * Stores customers and their calls separately and flattens all calls to one list. Requires all
+ * data on one customer to be printed in a sequence, that is items for customer A must not
+ * interleave items of customer B. 
+ * 
+ */
 public class FakePrinter implements Printer {
 
 	private List<Heading> headings;
@@ -21,6 +28,9 @@ public class FakePrinter implements Printer {
 		calls = new ArrayList<Call>();
 	}
 
+	/**
+	 * Stores the data describing details of one customer.
+	 */
 	@Override
 	public void printHeading(String name, String phoneNumber, String pricePlan) {
 		currentHeading = new Heading(name, phoneNumber, pricePlan);
@@ -29,30 +39,52 @@ public class FakePrinter implements Printer {
 
 	}
 
+	/**
+	 * Stores one call item. Requires that the most recently printed heading described
+	 * the callee passed as parameter to this method.
+	 */
 	@Override
 	public void printItem(DateTime time, String callee, String duration, String cost) {
 		calls.add(new Call(time, currentNumber, callee, duration, cost));
 	}
 
+	/**
+	 * Stores the total cost of all calls by the customer whose heading was most recently printed. 
+	 */
 	@Override
 	public void printTotal(String total) {
 		currentHeading.setTotal(total);
 	}
 
+	/**
+	 * Brings the FakePrinter to its initial state, clearing all the entries that have been
+	 * printed so far.
+	 */
 	public void clear() {
 		headings.clear();
 		calls.clear();
 
 	}
 
+	/**
+	 * 
+	 * @return All headings that have been printed since last initialisation.
+	 */
 	public List<Heading> getCustomers() {
 		return headings;
 	}
 
+	/**
+	 * 
+	 * @return All items that have been printed since last initialisation.
+	 */
 	public List<Call> getCalls() {
 		return calls;
 	}
 
+	/**
+	 * Simple container class for one heading printed with printHeading method
+	 */
 	public static class Heading {
 		final private String name, phoneNumber, pricePlan;
 		private String total;
@@ -128,6 +160,9 @@ public class FakePrinter implements Printer {
 
 	}
 
+	/**
+	 * Simple container class for one item printed with printItem method
+	 */
 	public static class Call {
 		final private String time, caller, callee, duration, cost;
 
@@ -207,10 +242,5 @@ public class FakePrinter implements Printer {
 				return false;
 			return true;
 		}
-
-
-
 	}
-
-
 }

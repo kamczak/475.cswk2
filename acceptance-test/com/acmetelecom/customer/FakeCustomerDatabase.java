@@ -8,21 +8,20 @@ public class FakeCustomerDatabase implements CustomerDatabase {
     private List<Customer> customers;
     
     public FakeCustomerDatabase() {
-	customers = new ArrayList<Customer>();
+    	customers = new ArrayList<Customer>();
     }
     
     @Override
     public List<Customer> getCustomers() {
-	return customers;
+    	return customers;
     }
     
     public void addCustomer(Customer c) {
-	customers.add(c);
+    	customers.add(c);
     }
 
     public void clear() {
-	customers.clear();
-	
+    	customers.clear();
     }
 
 }
