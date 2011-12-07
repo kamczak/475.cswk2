@@ -4,10 +4,13 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 
-//Stores information about the beginning and end event of each call
+/**
+ * This class encapsulates all information about calls
+ */
 public class Call {
 	private CallEvent start;
 	private CallEvent end;
+	// Records the call interval
 	private Interval callInterval;
 
 	public Call(CallEvent start, CallEvent end) {
@@ -21,6 +24,7 @@ public class Call {
 	}
 	
 	public Duration getDuration() {
+		// Returns call duration from which call length can be obtained
 	    return callInterval.toDuration();
 	}
 	
