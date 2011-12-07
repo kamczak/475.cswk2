@@ -64,7 +64,7 @@ public class CustomerCallLogTests {
 		// Assert
 		Assert.assertNotNull(exception);
 		Assert.assertEquals(exception.getMessage(),
-				"Call initiated twice for same number.");
+				UnexpectedCallException.MORE_THAN_ONE_CALL_FOR_SAME_NUMBER);
 	}
 
 	@Test

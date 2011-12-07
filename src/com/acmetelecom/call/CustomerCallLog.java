@@ -10,8 +10,7 @@ import com.acmetelecom.time.Clock;
 import com.google.inject.Inject;
 
 public class CustomerCallLog implements CallLog {
-	
-	// Stores calls of each phone number
+    // Stores calls of each phone number
 	private Map<String, List<Call>> userCalls;
 	// Stores partial call began by each user
 	private Map<String, CallEvent> initiatedCalls;
@@ -28,10 +27,11 @@ public class CustomerCallLog implements CallLog {
 	}
 	
 	@Override
-	public void callInitiated(String caller, String callee) throws UnexpectedCallException{
+	public void callInitiated(String caller, String callee) throws UnexpectedCallException {
 		CallEvent currentCall = initiatedCalls.get(caller);
 		if (currentCall != null) {
-			throw new UnexpectedCallException("Cannot initiate more than one call for same caller number");
+			throw new UnexpectedCallException(
+			        UnexpectedCallException.MORE_THAN_ONE_CALL_FOR_SAME_NUMBER);
 		}
 		// Store an event marking the initialisation of the phone call
 		initiatedCalls.put(caller, new CallEvent(caller,callee, clock.getCurrentDateTime()));
@@ -46,7 +46,8 @@ public class CustomerCallLog implements CallLog {
 		}
 
 		if (!begin.getCallee().equals(callee)){
-			throw new UnexpectedCallException("Cannot complete call for different callee than initialised");
+			throw new UnexpectedCallException(
+			        UnexpectedCallException.CALL_FOR_DIFFERENT_CALEE_THAN_INITIATED);
 		}
 		// Remove the beginning event stored
 		initiatedCalls.remove(caller);
