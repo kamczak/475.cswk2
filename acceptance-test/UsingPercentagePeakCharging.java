@@ -4,10 +4,10 @@ import fit.Fixture;
 import fit.Parse;
 
 
-public class UsingNewStrategy extends Fixture {
+public class UsingPercentagePeakCharging extends Fixture {
 
 	@Override
 	public void doTable(Parse p) {
-		BillingSystemUnderTest.useNewStrategy();
+		BillingSystemUnderTest.usePercentagePeakCharging();
 	}
 }

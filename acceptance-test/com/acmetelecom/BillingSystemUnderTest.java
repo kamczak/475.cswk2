@@ -16,6 +16,10 @@ import com.acmetelecom.strategy.PercentagePeakCharging;
 import com.acmetelecom.strategy.AggressivePeakCharging;
 import com.acmetelecom.strategy.ChargingStrategy;
 
+/**
+ * The main point of the FIT tests, that allows all classes to communicate with each other. 
+ *
+ */
 public class BillingSystemUnderTest {
 
 	public static final FakePrinter printer = new FakePrinter();
@@ -24,8 +28,8 @@ public class BillingSystemUnderTest {
 	public static final FakeClock clock = new FakeClock();
 	public static CallLog callLog;
 	public static PeakPeriod peakPeriod = new DailyPeakPeriod(new LocalTime(7, 0), new LocalTime(19, 0));
-	public static final ChargingStrategy oldStrategy = new AggressivePeakCharging(peakPeriod);
-	public static final ChargingStrategy newStrategy = new PercentagePeakCharging(peakPeriod);
+	public static final ChargingStrategy aggressiveStrategy = new AggressivePeakCharging(peakPeriod);
+	public static final ChargingStrategy percentageStrategy = new PercentagePeakCharging(peakPeriod);
 	public static ChargingStrategy currentStrategy;
 	public static BillingSystem billingSystem;
 
@@ -33,19 +37,23 @@ public class BillingSystemUnderTest {
 		customerDatabase.clear();
 	}
 	
-	public static void useOldStrategy() {
-		currentStrategy = oldStrategy;
+	public static void useAggressivePeakCharging() {
+		currentStrategy = aggressiveStrategy;
 	}
 	
-	public static void useNewStrategy() {
-		currentStrategy = newStrategy;
+	public static void usePercentagePeakCharging() {
+		currentStrategy = percentageStrategy;
 	}
 	
 	public static void initialiseBillingSystem() {
+		// Clear all items from the previous fixtures:
 		printer.clear();
 		customerDatabase.clear();
-		// billGenerator can stay as it is
+		// BillGenerator can stay as it is.
+		// Make sure no old times remain in the clock buffer:
 		clock.reset();
+		// Because the CustomerCallLog class has no clearing method,
+		// a new object has to be created in here:
 		callLog = new CustomerCallLog(clock);
 		billingSystem = new BillingSystem(
 				customerDatabase,
