@@ -47,7 +47,10 @@ public class FakeClock implements Clock {
 		return nextTimes[nextTime++];
 	}
 
-
+	/**
+	 * Removes any remaining times that were set to be returned in the next calls to
+	 * getCurrentTime() 
+	 */
 	public void reset() {
 		nextTime = -1;
 	}

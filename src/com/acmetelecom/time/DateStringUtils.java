@@ -10,15 +10,18 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class DateStringUtils {
 
-    private static DateTimeFormatter STANDARD_FORMATTER
+	// This format is used throughout the FIT acceptance tests, as they allow exact
+	// (including seconds) times of calls.
+    private static DateTimeFormatter FIT_FORMATTER
             = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+    // This format is used for printing customers' billings
     private static DateTimeFormatter BILLING_FORMATTER
             = DateTimeFormat.forPattern("dd.MM.yy HH:mm");
 
     public static DateTime parseStringToDateTime(String s) {
         DateTime dateTime = null;
         try {
-            dateTime = STANDARD_FORMATTER.parseDateTime(s);
+            dateTime = FIT_FORMATTER.parseDateTime(s);
         } catch (Exception e) {
             e.printStackTrace();
             assert false;
@@ -27,7 +30,7 @@ public class DateStringUtils {
     }
 
     public static String dateToString(DateTime dateTime) {
-        return dateTime.toString(STANDARD_FORMATTER);
+        return dateTime.toString(FIT_FORMATTER);
     }
 
     public static String dateToBillingFormat(DateTime dateTime) {

@@ -33,10 +33,6 @@ public class BillingSystemUnderTest {
 	public static ChargingStrategy currentStrategy;
 	public static BillingSystem billingSystem;
 
-	public static void resetCustomerDatabase() {
-		customerDatabase.clear();
-	}
-	
 	public static void useAggressivePeakCharging() {
 		currentStrategy = aggressiveStrategy;
 	}
@@ -55,6 +51,8 @@ public class BillingSystemUnderTest {
 		// Because the CustomerCallLog class has no clearing method,
 		// a new object has to be created in here:
 		callLog = new CustomerCallLog(clock);
+		// The new callLog and changes to the strategy can't be set to the old BillingSystem,
+		// so new one has to be created
 		billingSystem = new BillingSystem(
 				customerDatabase,
 				CentralTariffDatabase.getInstance(),
